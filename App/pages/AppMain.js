@@ -33,7 +33,7 @@ class Login extends Component {
       <View style={ { backgroundColor: '#2bb4f7', flex: 1 } }>
         <Image
                source={ require('../imgs/icon_university.jpg') }
-               style={ { marginTop: 70, width: 36, height: 36, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
+               style={ { marginTop: 60, width: 80, height: 80, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
         <Text style={ { fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
           学生缴费服务平台
         </Text>
@@ -54,7 +54,7 @@ class Login extends Component {
                                       username = text;
                                     } } />
         </View>
-        <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+        <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marinRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
           <Image
                  source={ require('../imgs/logre/ic_pwd_icon.png') }
                  style={ { width: 17, height: 14, marginLeft: 13 } } />
@@ -78,6 +78,35 @@ class Login extends Component {
             <Image
                    source={ require('../imgs/logre/ic_pwd_off.png') }
                    style={ { width: 17, height: 14, marginLeft: 13 } } />
+          </TouchableOpacity>
+        </View>
+        <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+          <Image
+                 source={ require('../imgs/logre/ic_pwd_icon.png') }
+                 style={ { width: 17, height: 14, marginLeft: 13 } } />
+          <TextInput
+                     style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 2.5 } }
+                     placeholder="请输入验证码"
+                     placeholderTextColor="#ffffff"
+                     underlineColorAndroid="transparent"
+                     numberOfLines={ 1 }
+                     ref={ 'password' }
+                     multiline={ true }
+                     secureTextEntry={ true }
+                     onChangeText={ (text) => {
+                                      password = text;
+                                    } } />
+          <Image
+                 source={ require('../imgs/logre/ic_pwd_icon.png') }
+                 style={ { flex: 1, width: 17, height: 14, marginLeft: 13 } } />
+          <TouchableOpacity
+                            onPress={ () => {
+                                        this.buttonChangeState()
+                                      } }
+                            style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
+            <Text>
+              看不清
+            </Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
