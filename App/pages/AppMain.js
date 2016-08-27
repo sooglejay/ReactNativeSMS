@@ -36,7 +36,7 @@ class Login extends Component {
           <View>
             <Image
                    source={ require('../imgs/icon_university.png') }
-                   style={ { marginTop: 60, width: 80, height: 80, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
+                   style={ { marginTop: 60, width: 140, height: 140, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
             <Text style={ { fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
               学生缴费服务平台
             </Text>
@@ -88,7 +88,7 @@ class Login extends Component {
                      source={ require('../imgs/logre/ic_pwd_icon.png') }
                      style={ { width: 17, height: 14, marginLeft: 13 } } />
               <TextInput
-                         style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 2.5 } }
+                         style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
                          placeholder="请输入验证码"
                          placeholderTextColor="#ffffff"
                          underlineColorAndroid="transparent"
@@ -101,7 +101,7 @@ class Login extends Component {
                                         } } />
               <Image
                      source={ require('../imgs/logre/ic_pwd_icon.png') }
-                     style={ { flex: 1, width: 17, height: 14, marginLeft: 13 } } />
+                     style={ { width: 17, height: 14, marginLeft: 13 } } />
               <TouchableOpacity
                                 onPress={ () => {
                                             this.buttonChangeState()
