@@ -9,7 +9,7 @@ import { NaviGoBack } from './utils/CommonUtils';
 export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 20 : 25)
 export const ABOVE_LOLIPOP = Platform.Version && Platform.Version > 19
 var _navigator;
-class App extends React.Component {
+class SplashApp extends React.Component {
   constructor(props) {
     super(props);
     this.renderScene = this.renderScene.bind(this);
@@ -58,5 +58,5 @@ let styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default SplashApp;
 

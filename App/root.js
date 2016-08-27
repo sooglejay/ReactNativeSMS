@@ -4,17 +4,17 @@ import {
 import {Provider} from 'react-redux'
 import configureStore from './store/configure-store'
 
-import App from './app'
+import SplashApp from './SplashApp'
 
 const store = configureStore();
 
-class rootApp extends Component {
+class RootApp extends Component {
     render() {
         return (
             <Provider store={store}>
-                <App/>
+                <SplashApp/>
             </Provider>
         )
     }
 }
-export default rootApp;
+export default RootApp;
