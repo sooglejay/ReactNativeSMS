@@ -37,7 +37,7 @@ class Login extends Component {
             <Image
                    source={ require('../imgs/icon_university.png') }
                    style={ { marginTop: 60, width: 130, height: 130, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
-            <Text style={ { fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
+            <Text style={ { color: 'white', fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
               学生缴费服务平台
             </Text>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
@@ -50,11 +50,16 @@ class Login extends Component {
                          placeholderTextColor="#ffffffff"
                          underlineColorAndroid="transparent"
                          numberOfLines={ 1 }
-                         ref={ 'username' }
-                         multiline={ true }
-                         autoFocus={ true }
+                         ref="username"
+                         returnKeyType="next"
+                         blurOnSubmit={ false }
+                         onSubmitEditing={ (event) => {
+                                             this.value = event.nativeEvent.text;
+                                             username = this.value;
+                                             this.refs.password.focus();
+                                           } }
                          onChangeText={ (text) => {
-                                          username = text;
+                                        
                                         } } />
               <TouchableOpacity
                                 onPress={ () => {
@@ -76,11 +81,17 @@ class Login extends Component {
                          placeholderTextColor="#ffffff"
                          underlineColorAndroid="transparent"
                          numberOfLines={ 1 }
-                         ref={ 'password' }
+                         ref="password"
                          multiline={ true }
                          secureTextEntry={ true }
+                         returnKeyType="next"
+                         blurOnSubmit={ false }
+                         onSubmitEditing={ (event) => {
+                                             this.value = event.nativeEvent.text;
+                                             password = this.value;
+                                             this.refs.verifycode.focus();
+                                           } }
                          onChangeText={ (text) => {
-                                          password = text;
                                         } } />
               <TouchableOpacity
                                 onPress={ () => {
@@ -92,8 +103,8 @@ class Login extends Component {
                        style={ { width: 17, height: 14, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
-            <View style={ { flexDirection: 'row', marginLeft: 12, marginRight: 12 } }>
-              <View style={ { flexDirection: 'row', flex: 1, backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
+            <View style={ { flexDirection: 'row', alignItems: 'center' } }>
+              <View style={ { flex: 4, flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
                 <Image
                        source={ require('../imgs/logre/ic_pwd_icon.png') }
                        style={ { width: 17, height: 14, marginLeft: 12 } } />
@@ -103,21 +114,22 @@ class Login extends Component {
                            placeholderTextColor="#ffffff"
                            underlineColorAndroid="transparent"
                            numberOfLines={ 1 }
-                           ref={ 'verifycode' }
-                           multiline={ false }
+                           ref="verifycode"
+                           blurOnSubmit={ true }
+                           onSubmitEditing={ (event) => {
+                                               this.value = event.nativeEvent.text;
+                                               verifycode = this.value;
+                                             } }
                            onChangeText={ (text) => {
-                                            verifycode = text;
                                           } } />
               </View>
-              <Image
-                     source={ require('../imgs/logre/ic_pwd_icon.png') }
-                     style={ { height: 14, borderRadius: 9, marginLeft: 6 } } />
-              <TouchableOpacity
-                                onPress={ () => {
-                                            this.buttonChangeState()
-                                          } }
-                                style={ { marginLeft: 6, height: 45, alignItems: 'center', justifyContent: 'center' } }>
-                <Text style={ { numberOfLines: 1 } }>
+              <TouchableOpacity style={ { flex: 1, height: 45, alignItems: 'center', justifyContent: 'center' } }>
+                <Image
+                       source={ { uri: 'http://220.166.172.33/Account/GetValidateCode' } }
+                       style={ { height: 45, marginLeft: 4 } } />
+              </TouchableOpacity>
+              <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
+                <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 16 } }>
                   看不清
                 </Text>
               </TouchableOpacity>
