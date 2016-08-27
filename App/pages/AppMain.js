@@ -16,7 +16,6 @@ class Login extends Component {
     this.buttonBackAction = this.buttonBackAction.bind(this);
     this.buttonRegisterOrLoginAction = this.buttonRegisterOrLoginAction.bind(this);
     this.buttonChangeState = this.buttonChangeState.bind(this);
-    this.findPwdAction = this.findPwdAction.bind(this);
     this.thirdPartLoginAction = this.thirdPartLoginAction.bind(this);
   }
   //返回
@@ -27,7 +26,6 @@ class Login extends Component {
   //用户登录/注册
   buttonRegisterOrLoginAction(position) {}
   buttonChangeState() {}
-  findPwdAction() {}
   thirdPartLoginAction(position) {}
 
   render() {
@@ -35,78 +33,64 @@ class Login extends Component {
       <View style={ { backgroundColor: '#2bb4f7', flex: 1 } }>
         <Image
                source={ require('../imgs/icon_university.jpg') }
-               style={ { width: 48, height: 48, marginTop: 48, justifyContent: 'center', alignItems: 'center' } } />
-        <Text style={ { justifyContent: center, marginTop: 60 } }>
+               style={ { marginTop: 70, width: 36, height: 36, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
+        <Text style={ { fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
           学生缴费服务平台
         </Text>
-        <View>
-          <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
+        <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+          <Image
+                 source={ require('../imgs/logre/ic_us_icon.png') }
+                 style={ { width: 17, height: 14, marginLeft: 13 } } />
+          <TextInput
+                     style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                     placeholder="请输入用户名"
+                     placeholderTextColor="#ffffffff"
+                     underlineColorAndroid="transparent"
+                     numberOfLines={ 1 }
+                     ref={ 'username' }
+                     multiline={ true }
+                     autoFocus={ true }
+                     onChangeText={ (text) => {
+                                      username = text;
+                                    } } />
+        </View>
+        <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+          <Image
+                 source={ require('../imgs/logre/ic_pwd_icon.png') }
+                 style={ { width: 17, height: 14, marginLeft: 13 } } />
+          <TextInput
+                     style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                     placeholder="请输入密码"
+                     placeholderTextColor="#ffffff"
+                     underlineColorAndroid="transparent"
+                     numberOfLines={ 1 }
+                     ref={ 'password' }
+                     multiline={ true }
+                     secureTextEntry={ true }
+                     onChangeText={ (text) => {
+                                      password = text;
+                                    } } />
+          <TouchableOpacity
+                            onPress={ () => {
+                                        this.buttonChangeState()
+                                      } }
+                            style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
             <Image
-                   source={ require('../imgs/logre/ic_us_icon.png') }
+                   source={ require('../imgs/logre/ic_pwd_off.png') }
                    style={ { width: 17, height: 14, marginLeft: 13 } } />
-            <TextInput
-                       style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
-                       placeholder="请输入用户名"
-                       placeholderTextColor="#aaaaaa"
-                       underlineColorAndroid="transparent"
-                       numberOfLines={ 1 }
-                       ref={ 'username' }
-                       multiline={ true }
-                       autoFocus={ true }
-                       onChangeText={ (text) => {
-                                        username = text;
-                                      } } />
-          </View>
-          <ShortLineTwo/>
-          <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
-            <Image
-                   source={ require('../imgs/logre/ic_pwd_icon.png') }
-                   style={ { width: 17, height: 14, marginLeft: 13 } } />
-            <TextInput
-                       style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
-                       placeholder="密码"
-                       placeholderTextColor="#aaaaaa"
-                       underlineColorAndroid="transparent"
-                       numberOfLines={ 1 }
-                       ref={ 'password' }
-                       multiline={ true }
-                       secureTextEntry={ true }
-                       onChangeText={ (text) => {
-                                        password = text;
-                                      } } />
-            <TouchableOpacity
-                              onPress={ () => {
-                                          this.buttonChangeState()
-                                        } }
-                              style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
-              <Image
-                     source={ require('../imgs/logre/ic_pwd_off.png') }
-                     style={ { width: 17, height: 14, marginLeft: 13 } } />
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
                           onPress={ () => {
                                       this.buttonRegisterOrLoginAction(0)
                                     } }
                           style={ { justifyContent: 'center', marginTop: 40, alignItems: 'center' } }>
-          <View style={ { backgroundColor: 'white', borderRadius: 15, width: 300, height: 40, justifyContent: 'center', alignItems: 'center' } }>
+          <View style={ { backgroundColor: 'white', borderRadius: 32, width: 300, height: 40, justifyContent: 'center', alignItems: 'center' } }>
             <Text style={ { color: '#1aa2ed' } }>
               登录
             </Text>
           </View>
         </TouchableOpacity>
-       // <View style={ { alignItems: 'flex-end', marginTop: 13 } }>
-//   <TouchableOpacity
-//                     onPress={ () => {
-//                                 this.findPwdAction()
-//                               } }
-//                     style={ { marginRight: 10 } }>
-//     <Text style={ { fontSize: 13, color: '#777' } }>
-//       找回密码
-//     </Text>
-//   </TouchableOpacity>
-// </View>
       </View>
       );
   }
