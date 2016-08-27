@@ -96,17 +96,17 @@ class Login extends Component {
             </Text>
           </View>
         </TouchableOpacity>
-        <View style={ { alignItems: 'flex-end', marginTop: 13 } }>
-          <TouchableOpacity
-                            onPress={ () => {
-                                        this.findPwdAction()
-                                      } }
-                            style={ { marginRight: 10 } }>
-            <Text style={ { fontSize: 13, color: '#777' } }>
-              找回密码
-            </Text>
-          </TouchableOpacity>
-        </View>
+       // <View style={ { alignItems: 'flex-end', marginTop: 13 } }>
+//   <TouchableOpacity
+//                     onPress={ () => {
+//                                 this.findPwdAction()
+//                               } }
+//                     style={ { marginRight: 10 } }>
+//     <Text style={ { fontSize: 13, color: '#777' } }>
+//       找回密码
+//     </Text>
+//   </TouchableOpacity>
+// </View>
       </View>
       );
   }
