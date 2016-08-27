@@ -103,13 +103,13 @@ class Login extends Component {
                        style={ { width: 17, height: 14, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
-            <View style={ { flexDirection: 'row', alignItems: 'center' } }>
-              <View style={ { flex: 4, flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+            <View style={ { flexDirection: 'row', marginLeft: 12, marginRight: 12, marginBottom: 12, alignItems: 'center' } }>
+              <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
                 <Image
                        source={ require('../imgs/logre/ic_pwd_icon.png') }
                        style={ { width: 17, height: 14, marginLeft: 12 } } />
                 <TextInput
-                           style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
+                           style={ { flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
                            placeholder="请输入验证码"
                            placeholderTextColor="#ffffff"
                            underlineColorAndroid="transparent"
@@ -123,13 +123,9 @@ class Login extends Component {
                            onChangeText={ (text) => {
                                           } } />
               </View>
-              <TouchableOpacity style={ { flex: 1, height: 45, alignItems: 'center', justifyContent: 'center' } }>
-                <Image
-                       source={ { uri: 'http://220.166.172.33/Account/GetValidateCode' } }
-                       style={ { height: 45, marginLeft: 4 } } />
-              </TouchableOpacity>
-              <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
-                <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 16 } }>
+              <TouchableOpacity style={ { marginLeft: 4, height: 45, alignItems: 'center', justifyContent: 'center' } }>
+                <Image source={ { height: 38, uri: 'http://220.166.172.33/Account/GetValidateCode' } } />
+                <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 16, marginLeft: 4, } }>
                   看不清
                 </Text>
               </TouchableOpacity>
