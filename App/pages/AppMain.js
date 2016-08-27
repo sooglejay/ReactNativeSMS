@@ -24,6 +24,8 @@ class Login extends Component {
     const {navigator} = this.props;
     return NaviGoBack(navigator);
   }
+
+
   //用户登录/注册
   buttonRegisterOrLoginAction(position) {}
   buttonChangeState() {}
@@ -43,7 +45,7 @@ class Login extends Component {
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
                      source={ require('../imgs/login/icon_user_name.png') }
-                     style={ { width: 17, height: 14, marginLeft: 12 } } />
+                     style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
                          style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                          placeholder="请输入用户名"
@@ -68,13 +70,13 @@ class Login extends Component {
                                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
                        source={ require('../imgs/login/icon_clear.png') }
-                       style={ { width: 17, height: 14, marginLeft: 12 } } />
+                       style={ { width: 30, height: 30, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
                      source={ require('../imgs/login/icon_password.png') }
-                     style={ { width: 17, height: 14, marginLeft: 12 } } />
+                     style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
                          style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                          placeholder="请输入密码"
@@ -100,14 +102,14 @@ class Login extends Component {
                                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
                        source={ require('../imgs/login/ic_pwd_off.png') }
-                       style={ { width: 17, height: 14, marginLeft: 12 } } />
+                       style={ { width: 30, height: 30, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
             <View style={ { flexDirection: 'row', marginLeft: 12, marginRight: 12, marginBottom: 12, alignItems: 'center' } }>
-              <View style={ { flex: 1, flexDirection: 'row', backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
+              <View style={ { flex: 2, flexDirection: 'row', backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
                 <Image
                        source={ require('../imgs/login/icon_tag.png') }
-                       style={ { width: 17, height: 14, marginLeft: 12 } } />
+                       style={ { width: 40, height: 40, marginLeft: 12 } } />
                 <TextInput
                            style={ { flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
                            placeholder="请输入验证码"
@@ -126,7 +128,7 @@ class Login extends Component {
               <TouchableOpacity style={ { flex: 1, marginLeft: 4, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image source={ { flex: 1, height: 38, uri: 'http://220.166.172.33/Account/GetValidateCode' } } />
               </TouchableOpacity>
-              <TouchableOpacity style={ {marginLeft: 4, height: 45, alignItems: 'center', justifyContent: 'center' } }>
+              <TouchableOpacity style={ { marginLeft: 4, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 12, marginLeft: 4, } }>
                   看不清
                 </Text>
