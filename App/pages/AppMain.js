@@ -67,13 +67,13 @@ class Login extends Component {
                                           } }
                                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
-                       source={ require('../imgs/logre/ic_pwd_off.png') }
+                       source={ require('../imgs/login/icon_clear.png') }
                        style={ { width: 17, height: 14, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
-                     source={ require('../imgs/logre/ic_pwd_icon.png') }
+                     source={ require('../imgs/login/icon_password.png') }
                      style={ { width: 17, height: 14, marginLeft: 12 } } />
               <TextInput
                          style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
@@ -99,7 +99,7 @@ class Login extends Component {
                                           } }
                                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
-                       source={ require('../imgs/login/icon_password.png') }
+                       source={ require('../imgs/login/ic_pwd_off.png') }
                        style={ { width: 17, height: 14, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
@@ -125,6 +125,8 @@ class Login extends Component {
               </View>
               <TouchableOpacity style={ { flex: 1, marginLeft: 4, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image source={ { flex: 1, height: 38, uri: 'http://220.166.172.33/Account/GetValidateCode' } } />
+              </TouchableOpacity>
+              <TouchableOpacity style={ {marginLeft: 4, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 12, marginLeft: 4, } }>
                   看不清
                 </Text>
