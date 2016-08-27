@@ -32,18 +32,18 @@ class Login extends Component {
   render() {
     return (
       <View style={ { backgroundColor: '#2bb4f7', flex: 1 } }>
-        <ScrollView>
+        <ScrollView style={ { flex: 1 } }>
           <View>
             <Image
                    source={ require('../imgs/icon_university.png') }
-                   style={ { marginTop: 60, width: 140, height: 140, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
+                   style={ { marginTop: 60, width: 130, height: 130, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
             <Text style={ { fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
               学生缴费服务平台
             </Text>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
                      source={ require('../imgs/logre/ic_us_icon.png') }
-                     style={ { width: 17, height: 14, marginLeft: 13 } } />
+                     style={ { width: 17, height: 14, marginLeft: 12 } } />
               <TextInput
                          style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                          placeholder="请输入用户名"
@@ -56,11 +56,20 @@ class Login extends Component {
                          onChangeText={ (text) => {
                                           username = text;
                                         } } />
+              <TouchableOpacity
+                                onPress={ () => {
+                                            this.buttonChangeState()
+                                          } }
+                                style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
+                <Image
+                       source={ require('../imgs/logre/ic_pwd_off.png') }
+                       style={ { width: 17, height: 14, marginLeft: 12 } } />
+              </TouchableOpacity>
             </View>
-            <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marinRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+            <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
                      source={ require('../imgs/logre/ic_pwd_icon.png') }
-                     style={ { width: 17, height: 14, marginLeft: 13 } } />
+                     style={ { width: 17, height: 14, marginLeft: 12 } } />
               <TextInput
                          style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                          placeholder="请输入密码"
@@ -80,33 +89,34 @@ class Login extends Component {
                                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
                        source={ require('../imgs/logre/ic_pwd_off.png') }
-                       style={ { width: 17, height: 14, marginLeft: 13 } } />
+                       style={ { width: 17, height: 14, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
-            <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+            <View style={ { flexDirection: 'row', marginLeft: 12, marginRight: 12 } }>
+              <View style={ { flexDirection: 'row', flex: 1, backgroundColor: '#72cdf7', borderRadius: 9, height: 45, alignItems: 'center' } }>
+                <Image
+                       source={ require('../imgs/logre/ic_pwd_icon.png') }
+                       style={ { width: 17, height: 14, marginLeft: 12 } } />
+                <TextInput
+                           style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
+                           placeholder="请输入验证码"
+                           placeholderTextColor="#ffffff"
+                           underlineColorAndroid="transparent"
+                           numberOfLines={ 1 }
+                           ref={ 'verifycode' }
+                           multiline={ false }
+                           onChangeText={ (text) => {
+                                            verifycode = text;
+                                          } } />
+              </View>
               <Image
                      source={ require('../imgs/logre/ic_pwd_icon.png') }
-                     style={ { width: 17, height: 14, marginLeft: 13 } } />
-              <TextInput
-                         style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
-                         placeholder="请输入验证码"
-                         placeholderTextColor="#ffffff"
-                         underlineColorAndroid="transparent"
-                         numberOfLines={ 1 }
-                         ref={ 'verifycode' }
-                         multiline={ true }
-                         secureTextEntry={ true }
-                         onChangeText={ (text) => {
-                                          verifycode = text;
-                                        } } />
-              <Image
-                     source={ require('../imgs/logre/ic_pwd_icon.png') }
-                     style={ { width: 17, height: 14, marginLeft: 13 } } />
+                     style={ { height: 14, borderRadius: 9, marginLeft: 6 } } />
               <TouchableOpacity
                                 onPress={ () => {
                                             this.buttonChangeState()
                                           } }
-                                style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
+                                style={ { marginLeft: 6, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text style={ { numberOfLines: 1 } }>
                   看不清
                 </Text>
