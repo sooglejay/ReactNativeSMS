@@ -19,125 +19,125 @@ export default class IndexPage extends Component {
     return (
       <View>
         <ScrollView
-                    style={ { flex: 1 } }
-                    showsVerticalScrollIndicator={ false }>
+          style={ { flex: 1 } }
+          showsVerticalScrollIndicator={ false }>
           <View>
             <IndicatorViewPager
-                                style={ { height: 140 } }
-                                indicator={ this._renderDotIndicator() }>
+              style={ { height: 140 } }
+              indicator={ this._renderDotIndicator() }>
               <View>
-                <Image source={ BANNER_IMGS[0] } />
+                <Image source={ BANNER_IMGS[0]} />
               </View>
               <View>
-                <Image source={ BANNER_IMGS[1] } />
+                <Image source={ BANNER_IMGS[1]} />
               </View>
               <View>
-                <Image source={ BANNER_IMGS[2] } />
+                <Image source={ BANNER_IMGS[2]} />
               </View>
               <View>
-                <Image source={ BANNER_IMGS[3] } />
+                <Image source={ BANNER_IMGS[3]} />
               </View>
             </IndicatorViewPager>
-            <View style={ { justifyContent: 'center', flexDirection: 'column', flex: 1, margin: 8, borderWidth: 1, borderColor: '#ff0000' } }>
-              <View style={ { flexDirection: 'row', height: 100 } }>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+            <View style={styles.viewWapperStyle}>
+              <View style={ styles.viewRowStyle }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
-                      缴费汇总表3232
+                      source={ require('../imgs/icon_university.png') }
+                      style={ styles.imageStyle} />
+                    <Text style={styles.textStyle}>
+                      缴费汇总表
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={ styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       缴费明细表
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={ styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       应缴费统计表
                     </Text>
                   </View>
                 </TouchableOpacity>
               </View>
               <ShortLine/>
-              <View style={ { flexDirection: 'row', height: 100 } }>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+              <View style={ styles.viewRowStyle }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={ styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       应收款缴费
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={ styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       其他缴费
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={ styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       未完成订单
                     </Text>
                   </View>
                 </TouchableOpacity>
               </View>
               <ShortLine/>
-              <View style={ { flexDirection: 'row', height: 100 } }>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+              <View style={ styles.viewRowStyle}>
+                <TouchableOpacity style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       已完成订单
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+                <TouchableOpacity style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={styles.imageStyle} />
+                    <Text style={styles.textStyle}>
                       待定
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ { flex: 1, alignItems: 'center', justifyContent: 'center' } }>
+                <TouchableOpacity style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                           source={ require('../imgs/icon_university.png') }
-                           style={ { width: 40, height: 40, alignItems: 'center' } } />
-                    <Text>
+                      source={ require('../imgs/icon_university.png') }
+                      style={styles.imageStyle } />
+                    <Text style={styles.textStyle}>
                       待定
                     </Text>
                   </View>
@@ -147,6 +147,13 @@ export default class IndexPage extends Component {
           </View>
         </ScrollView>
       </View>
-      );
+    );
   }
 }
+const styles = StyleSheet.create({
+  viewWapperStyle: { justifyContent: 'center', flexDirection: 'column', flex: 1, margin: 8, borderWidth: 1, borderColor: '#d9d9d9' },
+  viewRowStyle: { flexDirection: 'row', height: 100 },
+  touchableOpacityStyle: { flex: 1, alignSelf:'center',alignItems: 'center', justifyContent: 'center' },
+  imageStyle: { width: 40, height: 40,alignSelf:'center', alignItems: 'center', justifyContent: 'center' },
+  textStyle:{fontSize:15,alignSelf:'center', alignItems: 'center', justifyContent: 'center' },
+});
