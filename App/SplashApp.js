@@ -10,6 +10,9 @@ export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 20 : 25)
 export const ABOVE_LOLIPOP = Platform.Version && Platform.Version > 19
 var _navigator;
 class SplashApp extends React.Component {
+
+    // ...
+
   constructor(props) {
     super(props);
     this.renderScene = this.renderScene.bind(this);
@@ -26,9 +29,9 @@ class SplashApp extends React.Component {
     _navigator = navigator;
     return (
       <Component
-                 navigator={ navigator }
-                 route={ route } />
-      );
+        navigator={ navigator }
+        { ...route } />
+    );
   }
 
   configureScene(route, routeStack) {
@@ -39,17 +42,19 @@ class SplashApp extends React.Component {
     return (
       <View style={ { flex: 1 } }>
         <StatusBar
-                   barStyle='light-content'
-                   backgroundColor='transparent'
-                   style={ { height: STATUS_BAR_HEIGHT } } />
+          barStyle='light-content'
+          ref="StatusBar"
+
+          backgroundColor='transparent'
+          style={ { height: STATUS_BAR_HEIGHT } } />
         <Navigator
-                   ref='navigator'
-                   style={ styles.navigator }
-                   configureScene={ this.configureScene }
-                   renderScene={ this.renderScene }
-                   initialRoute={ { component: Splash, name: 'Splash' } } />
+          ref='navigator'
+          style={ styles.navigator }
+          configureScene={ this.configureScene }
+          renderScene={ this.renderScene }
+          initialRoute={ { component: Splash, name: 'Splash' } } />
       </View>
-      );
+    );
   }
 }
 let styles = StyleSheet.create({

@@ -5,6 +5,7 @@ import TextField from 'react-native-md-textinput';
 import ShortLineTwo from '../components/ShortLineTwo';
 import { toastShort } from '../utils/ToastUtil';
 
+import IndexApp from './IndexApp';
 var EncryptionModule = NativeModules.EncryptionModule;
 
 
@@ -37,24 +38,16 @@ class Login extends Component {
       });
   }
   btnLoginClick() {
-    //用户登录
-    if (username === '') {
-      toastShort('用户名不能为空...');
-      return;
-    }
-    toastShort(username);
-    if (password === '') {
-      toastShort('密码不能为空...');
-      return;
-    }
-    toastShort(password);
-    if (verifycode === '') {
-      toastShort('验证码不能为空...');
-      return;
-    }
-    toastShort(verifycode);
-    toastShort("姓名：" + username + "密码：" + password + "验证码：" + verifycode);
-
+    toastShort("you ");
+    const {navigator} = this.props;
+    this.timer = setTimeout(() => {
+      InteractionManager.runAfterInteractions(() => {
+        navigator.resetTo({
+          component: IndexApp,
+          name: 'IndexApp'
+        });
+      });
+    }, 1);
   }
   render() {
     return (
@@ -65,7 +58,7 @@ class Login extends Component {
               source={ require('../imgs/icon_university.png') }
               style={ { marginTop: 60, width: 130, height: 130, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
             <Text style={ { color: 'white', fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
-              学生缴费服务平台
+              学生缴费服务平台2333
             </Text>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
@@ -81,11 +74,10 @@ class Login extends Component {
                 returnKeyType="next"
                 blurOnSubmit={ false }
                 onSubmitEditing={ (event) => {
-                  this.value = event.nativeEvent.text;
-                  username = this.value;
                   this.refs.password.focus();
                 } }
                 onChangeText={ (text) => {
+                  username = text;
                 } } />
               <TouchableOpacity
                 onPress={ () => {
@@ -112,11 +104,10 @@ class Login extends Component {
                 returnKeyType="next"
                 blurOnSubmit={ false }
                 onSubmitEditing={ (event) => {
-                  this.value = event.nativeEvent.text;
-                  password = event.nativeEvent.text;
                   this.refs.verifycode.focus();
                 } }
                 onChangeText={ (text) => {
+                  password = text;
                 } } />
               <TouchableOpacity
                 onPress={ () => {
@@ -141,10 +132,11 @@ class Login extends Component {
                   ref="verifycode"
                   blurOnSubmit={ true }
                   onSubmitEditing={ (event) => {
-                    this.value = event.nativeEvent.text;
-                    verifycode = this.value;
+                    verifycode = event.nativeEvent.text;
+                    this.btnLoginClick();
                   } }
                   onChangeText={ (text) => {
+                    verifycode = text;
                   } } />
               </View>
               <TouchableOpacity style={ { width: 100, height: 45, alignItems: 'center', justifyContent: 'center' } }>
@@ -152,7 +144,7 @@ class Login extends Component {
               </TouchableOpacity>
               <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
-                  看不清
+                  见姐姐
                 </Text>
               </TouchableOpacity>
             </View>

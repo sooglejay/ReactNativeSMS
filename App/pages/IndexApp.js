@@ -1,0 +1,87 @@
+/**
+ * 商城主框架界面
+ */
+'use strict';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, Image, } from 'react-native';
+import TabNavigator from 'react-native-tab-navigator';
+
+import IndexPage from './IndexPage';
+import SystemNotificationPage from './SystemNotificationPage';
+import IndividualCenterPage from './IndividualCenterPage';
+
+class AppMain extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab: 'IndexPage'
+    };
+  }
+  render() {
+    return (
+      <TabNavigator>
+        <TabNavigator.Item
+					title="首页"
+					selected={ this.state.selectedTab === 'IndexPage' }
+					selectedTitleStyle={ styles.selectedTextStyle }
+					titleStyle={ styles.textStyle }
+					renderIcon={ () => <Image
+						source={ require("../imgs/icon_index_page.png") }
+						style={ styles.iconStyle } /> }
+					renderSelectedIcon={ () => <Image
+						source={ require("../imgs/ic_tab_home_press.png") }
+						style={ styles.iconStyle } /> }
+					onPress={ () => this.setState({
+						selectedTab: 'IndexPage'
+					}) }>
+          <IndexPage {...this.props}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+					title="系统通知"
+					selected={ this.state.selectedTab === 'SystemNotificationPage' }
+					selectedTitleStyle={ styles.selectedTextStyle }
+					titleStyle={ styles.textStyle }
+					renderIcon={ () => <Image
+						source={ require("../imgs/icon_system_notification_page_default.png") }
+						style={ styles.iconStyle } /> }
+					renderSelectedIcon={ () => <Image
+						source={ require("../imgs/icon_system_notification_page_selected.png") }
+						style={ styles.iconStyle } /> }
+					onPress={ () => this.setState({
+						selectedTab: 'SystemNotificationPage'
+					}) }>
+          <SystemNotificationPage {...this.props}/>
+        </TabNavigator.Item>
+        <TabNavigator.Item
+					title="个人中心"
+					selected={ this.state.selectedTab === 'IndividualCenterPage' }
+					selectedTitleStyle={ styles.selectedTextStyle }
+					titleStyle={ styles.textStyle }
+					renderIcon={ () => <Image
+						source={ require("../imgs/icon_individual_center_page_default.png") }
+						style={ styles.iconStyle } /> }
+					renderSelectedIcon={ () => <Image
+						source={ require("../imgs/icon_individual_center_page_selected.png") }
+						style={ styles.iconStyle } /> }
+					onPress={ () => this.setState({
+						selectedTab: 'IndividualCenterPage'
+					}) }>
+          <IndividualCenterPage {...this.props}/>
+        </TabNavigator.Item>
+      </TabNavigator>
+		);
+  }
+}
+const styles = StyleSheet.create({
+  iconStyle: {
+    width: 26,
+    height: 26,
+  },
+  textStyle: {
+    color: '#999',
+  },
+  selectedTextStyle: {
+    color: 'black',
+  }
+});
+export default AppMain;
