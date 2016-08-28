@@ -28,14 +28,11 @@ class SplashApp extends React.Component {
     let Component = route.component;
     _navigator = navigator;
     return (
-      <View>
-        <StatusBar
-          hidden={route.statusBarHidden}/>
+      
         <Component
           { ...route }
           navigator={ navigator }
           />
-      </View>
     );
   }
 
@@ -49,14 +46,14 @@ class SplashApp extends React.Component {
         <StatusBar
           barStyle='light-content'
           ref="StatusBar"
-          backgroundColor='#2bb4f7'
+          backgroundColor='transparent'
           style={ { height: STATUS_BAR_HEIGHT } } />
         <Navigator
           ref='navigator'
           style={ styles.navigator }
           configureScene={ this.configureScene }
           renderScene={ this.renderScene }
-          initialRoute={ { component: Splash, title: 'Splash',statusBarHidden:'true' } } />
+          initialRoute={ { component: Splash, title: 'Splash'} } />
       </View>
     );
   }
