@@ -43,11 +43,6 @@ class SplashApp extends React.Component {
   render() {
     return (
       <View style={ { flex: 1 } }>
-        <StatusBar
-          barStyle='light-content'
-          ref="StatusBar"
-          backgroundColor='transparent'
-          style={ { height: STATUS_BAR_HEIGHT } } />
         <Navigator
           ref='navigator'
           style={ styles.navigator }
