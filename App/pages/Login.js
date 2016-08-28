@@ -58,7 +58,7 @@ class Login extends Component {
               source={ require('../imgs/icon_university.png') }
               style={ { marginTop: 60, width: 130, height: 130, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' } } />
             <Text style={ { color: 'white', fontSize: 18, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginTop: 20, marginBottom: 40 } }>
-              学生缴费服务平台2333
+              学生缴费服务平台
             </Text>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
@@ -114,7 +114,7 @@ class Login extends Component {
                 } }
                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
-                  source={ require('../imgs/login/ic_pwd_off.png') }
+                  source={ require('../imgs/login/icon_tag.png') }
                   style={ { width: 30, height: 30, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>

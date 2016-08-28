@@ -11,6 +11,21 @@ const BANNER_IMGS = [
   require('../imgs/icon_university.png'),
   require('../imgs/icon_university.png')
 ];
+
+const styles = StyleSheet.create({
+  viewWapperStyle: { justifyContent: 'center', flexDirection: 'column', flex: 1, margin: 8, borderWidth: 1, borderColor: '#d9d9d9' },
+  viewRowStyle: { flexDirection: 'row', height: 100 },
+  touchableOpacityStyle: { flex: 1, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
+  imageStyle: { width: 40, height: 40, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
+  textStyle: { fontSize: 15, alignSelf: 'center', marginTop: 4, alignItems: 'center', justifyContent: 'center' },
+
+
+  container: { flex: 'row', backgroundColor: '#2bb4f7', height: 64 },
+  leftView: { justifyContent: 'flex-start', alignItems: 'center', margin: 12 },
+  centerView: { justifyContent: 'center', alignItems: 'center' },
+  rightView: { justifyContent: 'flex-end', alignItems: 'center' },
+});
+
 export default class IndexPage extends Component {
   _renderDotIndicator() {
     return <PagerDotIndicator pageCount={ 4 } />;
@@ -21,7 +36,7 @@ export default class IndexPage extends Component {
         <ScrollView
           style={ { flex: 1 } }
           showsVerticalScrollIndicator={ false }>
-          <View>
+          <View style={{flex:1}}>
             <IndicatorViewPager
               style={ { height: 140 } }
               indicator={ this._renderDotIndicator() }>
@@ -150,10 +165,6 @@ export default class IndexPage extends Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  viewWapperStyle: { justifyContent: 'center', flexDirection: 'column', flex: 1, margin: 8, borderWidth: 1, borderColor: '#d9d9d9' },
-  viewRowStyle: { flexDirection: 'row', height: 100 },
-  touchableOpacityStyle: { flex: 1, alignSelf:'center',alignItems: 'center', justifyContent: 'center' },
-  imageStyle: { width: 40, height: 40,alignSelf:'center', alignItems: 'center', justifyContent: 'center' },
-  textStyle:{fontSize:15,alignSelf:'center', alignItems: 'center', justifyContent: 'center' },
-});
+
+
+
