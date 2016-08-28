@@ -19,11 +19,38 @@ const styles = StyleSheet.create({
   imageStyle: { width: 40, height: 40, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
   textStyle: { fontSize: 15, alignSelf: 'center', marginTop: 4, alignItems: 'center', justifyContent: 'center' },
 
-
-  container: { flex: 'row', backgroundColor: '#2bb4f7', height: 64 },
-  leftView: { justifyContent: 'flex-start', alignItems: 'center', margin: 12 },
-  centerView: { justifyContent: 'center', alignItems: 'center' },
-  rightView: { justifyContent: 'flex-end', alignItems: 'center' },
+  topbar_bg: {
+    height: 48,
+    backgroundColor: '#2bb4f7',
+    flexDirection: 'row'
+  },
+  topbar_left_item: {
+    width: 48,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  topbar_center_bg: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  topbar_center_tv: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  topbar_right_item: {
+    width: 48,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  topbar_right_tv: {
+    fontSize: 15,
+    color: 'white',
+    alignSelf: 'center'
+  }
 });
 
 export default class IndexPage extends Component {
@@ -36,7 +63,28 @@ export default class IndexPage extends Component {
         <ScrollView
           style={ { flex: 1 } }
           showsVerticalScrollIndicator={ false }>
-          <View style={{flex:1}}>
+          <View style={{ flex: 1 }}>
+
+            <View style={styles.topbar_bg}>
+              <TouchableOpacity onPress={() => { } }
+                style={styles.topbar_left_item}>
+                <Image
+                  style={{ width: 32, height: 32 }}
+                  source={require('../imgs/arrow_left.png') }
+                  />
+              </TouchableOpacity>
+              <View style={styles.topbar_center_bg}>
+                <Text style={styles.topbar_center_tv}>学生缴费服务平台</Text>
+              </View>
+              <TouchableOpacity onPress={() => { } }
+                style={styles.topbar_right_item}>
+                <Image
+                  style={{ width: 32, height: 32 }}
+                  source={require('../imgs/icon_power.png') }
+                  />
+              </TouchableOpacity>
+            </View>
+
             <IndicatorViewPager
               style={ { height: 140 } }
               indicator={ this._renderDotIndicator() }>
