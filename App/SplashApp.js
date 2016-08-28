@@ -11,7 +11,7 @@ export const ABOVE_LOLIPOP = Platform.Version && Platform.Version > 19
 var _navigator;
 class SplashApp extends React.Component {
 
-    // ...
+  // ...
 
   constructor(props) {
     super(props);
@@ -28,9 +28,14 @@ class SplashApp extends React.Component {
     let Component = route.component;
     _navigator = navigator;
     return (
-      <Component
-        navigator={ navigator }
-        { ...route } />
+      <View>
+        <StatusBar
+          hidden={route.statusBarHidden}/>
+        <Component
+          { ...route }
+          navigator={ navigator }
+          />
+      </View>
     );
   }
 
@@ -44,15 +49,14 @@ class SplashApp extends React.Component {
         <StatusBar
           barStyle='light-content'
           ref="StatusBar"
-
-          backgroundColor='transparent'
+          backgroundColor='#2bb4f7'
           style={ { height: STATUS_BAR_HEIGHT } } />
         <Navigator
           ref='navigator'
           style={ styles.navigator }
           configureScene={ this.configureScene }
           renderScene={ this.renderScene }
-          initialRoute={ { component: Splash, name: 'Splash' } } />
+          initialRoute={ { component: Splash, title: 'Splash',statusBarHidden:'true' } } />
       </View>
     );
   }

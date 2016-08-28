@@ -1,6 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
-import{ 
+import {
     View,
     Text,
     Dimensions,
@@ -14,9 +14,11 @@ import{
 export default class SystemNotificationPage extends Component {
     render() {
         return (
-            <div>
-                hello SystemNotification.js
-            </div>
+            <View>
+                <Text>
+                    hello SystemNotification.js
+                </Text>
+            </View>
         );
     }
 }

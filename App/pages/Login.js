@@ -44,10 +44,10 @@ class Login extends Component {
       InteractionManager.runAfterInteractions(() => {
         navigator.resetTo({
           component: IndexApp,
-          name: 'IndexApp'
+          title: '首页'
         });
       });
-    }, 1);
+    }, 2);
   }
   render() {
     return (

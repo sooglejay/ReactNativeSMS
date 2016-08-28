@@ -26,10 +26,10 @@ class AppMain extends Component {
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => <Image
-						source={ require("../imgs/icon_index_page.png") }
+						source={ require("../imgs/index/icon_index_page_default.png") }
 						style={ styles.iconStyle } /> }
 					renderSelectedIcon={ () => <Image
-						source={ require("../imgs/ic_tab_home_press.png") }
+						source={ require("../imgs/index/icon_index_page_selected.png") }
 						style={ styles.iconStyle } /> }
 					onPress={ () => this.setState({
 						selectedTab: 'IndexPage'
@@ -42,10 +42,10 @@ class AppMain extends Component {
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => <Image
-						source={ require("../imgs/icon_system_notification_page_default.png") }
+						source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
 						style={ styles.iconStyle } /> }
 					renderSelectedIcon={ () => <Image
-						source={ require("../imgs/icon_system_notification_page_selected.png") }
+						source={ require("../imgs/system_notification/icon_system_notification_page_selected.png") }
 						style={ styles.iconStyle } /> }
 					onPress={ () => this.setState({
 						selectedTab: 'SystemNotificationPage'
@@ -58,10 +58,10 @@ class AppMain extends Component {
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => <Image
-						source={ require("../imgs/icon_individual_center_page_default.png") }
+						source={ require("../imgs/individual_center/icon_individual_center_page_default.png") }
 						style={ styles.iconStyle } /> }
 					renderSelectedIcon={ () => <Image
-						source={ require("../imgs/icon_individual_center_page_selected.png") }
+						source={ require("../imgs/individual_center/icon_individual_center_page_selected.png") }
 						style={ styles.iconStyle } /> }
 					onPress={ () => this.setState({
 						selectedTab: 'IndividualCenterPage'
