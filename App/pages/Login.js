@@ -23,7 +23,7 @@ class Login extends Component {
     this.btnLoginClick = this.btnLoginClick.bind(this);
   }
   componentDidMount() {
-    loginRequestFromApiAsync();
+    // loginRequestFromApiAsync();
   }
   loginRequestFromApiAsync() {
     return fetch('http://facebook.github.io/react-native/movies.json')
@@ -143,7 +143,7 @@ class Login extends Component {
                 <Image source={ { width: 100, height: 38, uri: 'http://220.166.172.33/Account/GetValidateCode' } } />
               </TouchableOpacity>
               <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
-                <Text style={ { numberOfLines: 1, color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
+                <Text numberOfLines={1} style={ {  color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
                   见姐姐
                 </Text>
               </TouchableOpacity>

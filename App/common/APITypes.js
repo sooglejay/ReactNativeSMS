@@ -20,5 +20,3 @@ export const HandShakeCode = {
     paymentTableRequireCollection:'0007',
     orderCompleted:'0008',
 }
-
-

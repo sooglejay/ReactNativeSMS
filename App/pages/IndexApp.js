@@ -41,19 +41,27 @@ class AppMain extends Component {
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => {
-						return <Image
-							source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
-							style={ styles.iconStyle } >
-							<View style={{ width: 12, height: 12, justifyContent: 'flex-end', alignItems: 'flex-start', backgroundColor: 'red', borderRadius: 360 }}>
-                <Text style={{ color: 'white', fontSize: 8 }}>
-									1
-                </Text>
-							</View>
-						</Image>
+						return (
+							<View style={{ flexDirection: 'row' }}>
+								<Image
+									source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
+									style={ [styles.iconStyle,{flex:1,justifyContent:'center',alignItems:'center'}] } />
+								<View style={{ height:14,justifyContent: 'flex-start', alignItems: 'flex-start',backgroundColor: 'red', borderRadius: 360 }}>
+									<Text style={{ color: 'white', fontSize: 8, justifyContent: 'center', alignItems: 'center', }}>
+										99+
+									</Text>
+								</View>
+							</View>);
+
 					} }
-					renderSelectedIcon={ () => <Image
-						source={ require("../imgs/system_notification/icon_system_notification_page_selected.png") }
-						style={ styles.iconStyle } /> }
+					renderSelectedIcon={ () => {
+						return (
+							<View style={{ flexDirection: 'row' }}>
+								<Image
+									source={ require("../imgs/system_notification/icon_system_notification_page_selected.png") }
+									style={ styles.iconStyle } />
+							</View>);
+					} }
 					onPress={ () => this.setState({
 						selectedTab: 'SystemNotificationPage'
 					}) }>
