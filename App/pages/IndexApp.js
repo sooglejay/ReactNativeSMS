@@ -8,6 +8,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import IndexPage from './IndexPage';
 import SystemNotificationPage from './SystemNotificationPage';
 import IndividualCenterPage from './IndividualCenterPage';
+import Badge from 'react-native-smart-badge'
 
 class AppMain extends Component {
   constructor(props) {
@@ -45,13 +46,15 @@ class AppMain extends Component {
 							<View style={{ flexDirection: 'row' }}>
 								<Image
 									source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
-									style={ [styles.iconStyle,{flex:1,justifyContent:'center',alignItems:'center'}] } />
-								<View style={{ height:14,justifyContent: 'flex-start', alignItems: 'flex-start',backgroundColor: 'red', borderRadius: 360 }}>
-									<Text style={{ color: 'white', fontSize: 8, justifyContent: 'center', alignItems: 'center', }}>
-										99+
-									</Text>
-								</View>
-							</View>);
+									style={{ width: 30, height: 30 }}/>
+								<Badge
+									style={{ position: 'absolute', backgroundColor: '#ff0000', left:18 , }}
+									textStyle={{ color: '#ffffff', fontSize: 12, }}>
+									99+
+								</Badge>
+							</View>
+
+						);
 
 					} }
 					renderSelectedIcon={ () => {

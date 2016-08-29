@@ -38,7 +38,7 @@ class Login extends Component {
       });
   }
   btnLoginClick() {
-    toastShort("you ");
+    // toastShort("you ");
     const {navigator} = this.props;
     this.timer = setTimeout(() => {
       InteractionManager.runAfterInteractions(() => {
@@ -144,7 +144,7 @@ class Login extends Component {
               </TouchableOpacity>
               <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text numberOfLines={1} style={ {  color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
-                  见姐姐
+                  看不见0
                 </Text>
               </TouchableOpacity>
             </View>
