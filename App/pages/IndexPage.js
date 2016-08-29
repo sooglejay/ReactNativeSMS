@@ -1,8 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView, InteractionManager, } from 'react-native';
+import { View, StatusBar, Text, Platform, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView, InteractionManager, } from 'react-native';
 import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
+const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 10 : 0)
 
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 const BANNER_IMGS = [
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center'
   },
   topbar_center_bg: {
@@ -60,26 +62,26 @@ export default class IndexPage extends Component {
   render() {
     return (
       <View>
+        <View style={{backgroundColor: '#2bb4f7',height:STATUS_BAR_HEIGHT}}></View>
         <ScrollView
           style={ { flex: 1 } }
           showsVerticalScrollIndicator={ false }>
           <View style={{ flex: 1 }}>
-
             <View style={styles.topbar_bg}>
               <TouchableOpacity onPress={() => { } }
                 style={styles.topbar_left_item}>
                 <Image
-                  style={{ width: 26, height: 26 }}
+                  style={{ width: 22, height: 22 }}
                   source={require('../imgs/icon_university.png') }
                   />
               </TouchableOpacity>
               <View style={styles.topbar_center_bg}>
-                <Text style={styles.topbar_center_tv}>学生缴费服务平台3</Text>
+                <Text style={styles.topbar_center_tv}>学生缴费服务平台</Text>
               </View>
               <TouchableOpacity onPress={() => { } }
                 style={styles.topbar_right_item}>
                 <Image
-                  style={{ width: 26, height: 26 }}
+                  style={{ width: 22, height: 22 }}
                   source={require('../imgs/icon_power.png') }
                   />
               </TouchableOpacity>

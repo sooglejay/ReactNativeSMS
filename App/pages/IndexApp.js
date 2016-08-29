@@ -46,14 +46,13 @@ class AppMain extends Component {
 							<View style={{ flexDirection: 'row' }}>
 								<Image
 									source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
-									style={{ width: 30, height: 30 }}/>
+									style={{ width: 32, height: 32 }}/>
 								<Badge
 									style={{ position: 'absolute', backgroundColor: '#ff0000', left:18 , }}
 									textStyle={{ color: '#ffffff', fontSize: 12, }}>
 									99+
 								</Badge>
 							</View>
-
 						);
 
 					} }
@@ -92,8 +91,8 @@ class AppMain extends Component {
 }
 const styles = StyleSheet.create({
   iconStyle: {
-    width: 26,
-    height: 26,
+    width: 32,
+    height: 32,
   },
   textStyle: {
     color: '#999',

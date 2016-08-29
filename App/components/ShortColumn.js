@@ -19,6 +19,7 @@ const ShortColumn = () => (
 );
 const styles=StyleSheet.create({
     short_line:{
+        
     },
 });
 export default ShortColumn;
