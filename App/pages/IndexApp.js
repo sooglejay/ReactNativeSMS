@@ -10,7 +10,7 @@ import SystemNotificationPage from './SystemNotificationPage';
 import IndividualCenterPage from './IndividualCenterPage';
 import Badge from 'react-native-smart-badge'
 
-class AppMain extends Component {
+export default class AppMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -101,4 +101,3 @@ const styles = StyleSheet.create({
     color: 'black',
   }
 });
-export default AppMain;

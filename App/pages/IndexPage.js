@@ -62,31 +62,30 @@ export default class IndexPage extends Component {
   render() {
     return (
       <View>
-        <View style={{backgroundColor: '#2bb4f7',height:STATUS_BAR_HEIGHT}}></View>
+        <View style={{ backgroundColor: '#2bb4f7', height: STATUS_BAR_HEIGHT }}></View>
+        <View style={styles.topbar_bg}>
+          <TouchableOpacity onPress={() => { } }
+            style={styles.topbar_left_item}>
+            <Image
+              style={{ width: 22, height: 22 }}
+              source={require('../imgs/icon_university.png') }
+              />
+          </TouchableOpacity>
+          <View style={styles.topbar_center_bg}>
+            <Text style={styles.topbar_center_tv}>学生缴费服务平台</Text>
+          </View>
+          <TouchableOpacity onPress={() => { } }
+            style={styles.topbar_right_item}>
+            <Image
+              style={{ width: 22, height: 22 }}
+              source={require('../imgs/icon_power.png') }
+              />
+          </TouchableOpacity>
+        </View>
         <ScrollView
           style={ { flex: 1 } }
           showsVerticalScrollIndicator={ false }>
           <View style={{ flex: 1 }}>
-            <View style={styles.topbar_bg}>
-              <TouchableOpacity onPress={() => { } }
-                style={styles.topbar_left_item}>
-                <Image
-                  style={{ width: 22, height: 22 }}
-                  source={require('../imgs/icon_university.png') }
-                  />
-              </TouchableOpacity>
-              <View style={styles.topbar_center_bg}>
-                <Text style={styles.topbar_center_tv}>学生缴费服务平台</Text>
-              </View>
-              <TouchableOpacity onPress={() => { } }
-                style={styles.topbar_right_item}>
-                <Image
-                  style={{ width: 22, height: 22 }}
-                  source={require('../imgs/icon_power.png') }
-                  />
-              </TouchableOpacity>
-            </View>
-
             <IndicatorViewPager
               style={ { height: 140 } }
               indicator={ this._renderDotIndicator() }>
