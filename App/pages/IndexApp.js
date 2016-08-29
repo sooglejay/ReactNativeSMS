@@ -91,8 +91,8 @@ class AppMain extends Component {
 }
 const styles = StyleSheet.create({
   iconStyle: {
-    width: 32,
-    height: 32,
+    width: 30,
+    height: 30,
   },
   textStyle: {
     color: '#999',
