@@ -5,6 +5,9 @@ import { View, StatusBar, Text, Platform, Dimensions, ListView,
 import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import { toastShort } from '../utils/ToastUtil';
+import CommonStyle from '../styles';
+import Button from 'react-native-smart-button'
+
 const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 10 : 0);
 
 const STORE_DATA = {
@@ -62,6 +65,7 @@ export default class SystemNotificationPage extends Component {
                 onEndReachedThreshold={10}
                 enableEmptySections={true}
                 renderHeader={this._renderHeader}
+                renderFooter={this._renderFooter}
                 renderSeparator={this._renderSeparatorView}
                 />
         );
@@ -108,24 +112,48 @@ export default class SystemNotificationPage extends Component {
             <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>缴费金额(元) </Text>
         </View>);
     }
+    _renderFooter() {
+        return (<View style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center' }}>
+            <Button
+                touchableType={'highlight'}
+                underlayColor={'#f0f0f0f0'}
+                style={{ flex:1,margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
+                textStyle={{ fontSize: 15, color: '#333333' }}
+                >
+                <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
+                删除
+            </Button>
+            <Button
+                touchableType={'highlight'}
+                underlayColor={'#f0f0f0f0'}
+                style={{ flex:1,margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
+                textStyle={{ fontSize: 15, color: '#333333' }}
+                >
+                <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
+                支付
+            </Button>
+
+
+        </View>);
+    }
 
     render() {
         return (
             <View>
                 <View style={{ backgroundColor: '#2bb4f7', height: STATUS_BAR_HEIGHT }}></View>
-                <View style={styles.topbar_bg}>
+                <View style={CommonStyle.topbar_bg}>
                     <TouchableOpacity onPress={() => { } }
-                        style={styles.topbar_left_item}>
+                        style={CommonStyle.topbar_left_item}>
                         <Image
                             style={{ width: 22, height: 22 }}
                             source={require('../imgs/icon_university.png') }
                             />
                     </TouchableOpacity>
-                    <View style={styles.topbar_center_bg}>
-                        <Text style={styles.topbar_center_tv}>学生缴费服务平台</Text>
+                    <View style={CommonStyle.topbar_center_bg}>
+                        <Text style={CommonStyle.topbar_center_tv}>系统通知</Text>
                     </View>
                     <TouchableOpacity onPress={() => { } }
-                        style={styles.topbar_right_item}>
+                        style={CommonStyle.topbar_right_item}>
                         <Image
                             style={{ width: 22, height: 22 }}
                             source={require('../imgs/icon_power.png') }
@@ -138,7 +166,13 @@ export default class SystemNotificationPage extends Component {
                     <View
                         style={ { flex: 1 } }>
 
-                        <View>
+                        <View style={{ flexDirection: 'row', backgroundColor: '#f5f5f5', justifyContent: 'flex-start' }}>
+                            <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>
+                                <Image source={require('../imgs/icon_power.png') } style={{ width: 16, height: 16, marginRight: 6 }}/>
+                                <Text style={{ color: '#1ba0ec', fontSize: 15 }}>
+                                    您有未完成的订单，请及时支付
+                                </Text>
+                            </TouchableOpacity>
                         </View>
 
                         <View>
