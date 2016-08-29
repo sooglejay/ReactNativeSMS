@@ -157,7 +157,7 @@ export default class SystemNotificationPage extends Component {
                         style={CommonStyle.topbar_left_item}>
                         <Image
                             style={{ width: 22, height: 22 }}
-                            source={require('../imgs/icon_university.png') }
+                            source={require('../imgs/arrow_left.png') }
                             />
                     </TouchableOpacity>
                     <View style={CommonStyle.topbar_center_bg}>
