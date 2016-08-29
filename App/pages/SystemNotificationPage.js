@@ -43,6 +43,8 @@ const STORE_DATA = {
         }
     ]
 };
+
+
 export default class SystemNotificationPage extends Component {
     constructor(props) {
         super(props);
@@ -113,28 +115,37 @@ export default class SystemNotificationPage extends Component {
         </View>);
     }
     _renderFooter() {
-        return (<View style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center' }}>
-            <Button
-                touchableType={'highlight'}
-                underlayColor={'#f0f0f0f0'}
-                style={{ flex:1,margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
-                textStyle={{ fontSize: 15, color: '#333333' }}
-                >
-                <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
-                删除
-            </Button>
-            <Button
-                touchableType={'highlight'}
-                underlayColor={'#f0f0f0f0'}
-                style={{ flex:1,margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
-                textStyle={{ fontSize: 15, color: '#333333' }}
-                >
-                <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
-                支付
-            </Button>
+        return (
+            <View style={{ backgroundColor: 'white' }}>
+                <View style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center' }}>
+                    <Button
+                        touchableType={'highlight'}
+                        underlayColor={'#f0f0f0f0'}
+                        style={{ flex: 1, margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
+                        textStyle={{ fontSize: 15, color: '#333333' }}
+                        >
+                        <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
+                        删除
+                    </Button>
+                    <Button
+                        touchableType={'highlight'}
+                        underlayColor={'#f0f0f0f0'}
+                        style={{ flex: 1, margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
+                        textStyle={{ fontSize: 15, color: '#333333' }}
+                        >
+                        <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
+                        支付
+                    </Button>
+                </View>
+                <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
+                <View style={{ backgroundColor: 'white' }}>
+                    <Text style={{ color: '#666666', marginLeft: 12, marginTop: 12, fontSize: 13 }}>订单号: 2016070400002</Text>
+                    <Text style={{ color: '#666666', marginLeft: 12, marginTop: 12, fontSize: 13 }}>订单时间: 2016-07-04 11: 55: 14</Text>
+                    <Text style={{ color: '#666666', marginLeft: 12, marginTop: 12, fontSize: 13, marginBottom: 12 }}>订单金额: 122.00元</Text>
+                </View>
 
 
-        </View>);
+            </View>);
     }
 
     render() {
