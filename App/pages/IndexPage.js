@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   touchableOpacityStyle: { flex: 1, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
   imageStyle: { width: 40, height: 40, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
   textStyle: { fontSize: 15, alignSelf: 'center', marginTop: 4, alignItems: 'center', justifyContent: 'center' },
-
+  imagePlus:{width:80,height:80,justifyContent:'center',alignItems:'center'},
   topbar_bg: {
     height: 48,
     backgroundColor: '#2bb4f7',
@@ -69,17 +69,17 @@ export default class IndexPage extends Component {
               <TouchableOpacity onPress={() => { } }
                 style={styles.topbar_left_item}>
                 <Image
-                  style={{ width: 32, height: 32 }}
-                  source={require('../imgs/arrow_left.png') }
+                  style={{ width: 26, height: 26 }}
+                  source={require('../imgs/icon_university.png') }
                   />
               </TouchableOpacity>
               <View style={styles.topbar_center_bg}>
-                <Text style={styles.topbar_center_tv}>学生缴费服务平台</Text>
+                <Text style={styles.topbar_center_tv}>学生缴费服务平台3</Text>
               </View>
               <TouchableOpacity onPress={() => { } }
                 style={styles.topbar_right_item}>
                 <Image
-                  style={{ width: 32, height: 32 }}
+                  style={{ width: 26, height: 26 }}
                   source={require('../imgs/icon_power.png') }
                   />
               </TouchableOpacity>
@@ -184,27 +184,15 @@ export default class IndexPage extends Component {
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
-                  <View>
-                    <Image
-                      source={ require('../imgs/icon_university.png') }
-                      style={styles.imageStyle} />
-                    <Text style={styles.textStyle}>
-                      待定
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <ShortColumn/>
                 <TouchableOpacity style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
-                      style={styles.imageStyle } />
-                    <Text style={styles.textStyle}>
-                      待定
-                    </Text>
+                      source={ require('../imgs/icon_plus.png') }
+                      style={styles.imagePlus } />
                   </View>
                 </TouchableOpacity>
+                <View style={ styles.touchableOpacityStyle }>
+                </View>
               </View>
             </View>
           </View>

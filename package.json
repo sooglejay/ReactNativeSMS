@@ -13,6 +13,8 @@
     "react-native-linear-gradient": "^1.5.12",
     "react-native-md-textinput": "^2.0.4",
     "react-native-root-toast": "^1.0.3",
-    "react-native-tab-navigator": "^0.3.3"
+    "react-native-scrollable-tab-view": "^0.5.4",
+    "react-native-tab-navigator": "^0.3.3",
+    "react-native-vector-icons": "^2.1.0"
   }
 }
