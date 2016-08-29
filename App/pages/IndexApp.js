@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-
 import IndexPage from './IndexPage';
 import SystemNotificationPage from './SystemNotificationPage';
 import IndividualCenterPage from './IndividualCenterPage';
@@ -41,9 +40,17 @@ class AppMain extends Component {
 					selected={ this.state.selectedTab === 'SystemNotificationPage' }
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
-					renderIcon={ () => <Image
-						source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
-						style={ styles.iconStyle } /> }
+					renderIcon={ () => {
+						return <Image
+							source={ require("../imgs/system_notification/icon_system_notification_page_default.png") }
+							style={ styles.iconStyle } >
+							<View style={{ width: 12, height: 12, justifyContent: 'flex-end', alignItems: 'flex-start', backgroundColor: 'red', borderRadius: 360 }}>
+                <Text style={{ color: 'white', fontSize: 8 }}>
+									1
+                </Text>
+							</View>
+						</Image>
+					} }
 					renderSelectedIcon={ () => <Image
 						source={ require("../imgs/system_notification/icon_system_notification_page_selected.png") }
 						style={ styles.iconStyle } /> }

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   touchableOpacityStyle: { flex: 1, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
   imageStyle: { width: 40, height: 40, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
   textStyle: { fontSize: 15, alignSelf: 'center', marginTop: 4, alignItems: 'center', justifyContent: 'center' },
-  imagePlus:{width:80,height:80,justifyContent:'center',alignItems:'center'},
+  imagePlus: { width: 60, height: 60, justifyContent: 'center', alignItems: 'center' },
   topbar_bg: {
     height: 48,
     backgroundColor: '#2bb4f7',
@@ -191,6 +191,7 @@ export default class IndexPage extends Component {
                       style={styles.imagePlus } />
                   </View>
                 </TouchableOpacity>
+                <ShortColumn/>
                 <View style={ styles.touchableOpacityStyle }>
                 </View>
               </View>
