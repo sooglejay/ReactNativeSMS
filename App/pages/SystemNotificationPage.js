@@ -5,10 +5,8 @@ import { View, StatusBar, Text, Platform, Dimensions, ListView,
 import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import { toastShort } from '../utils/ToastUtil';
-import CommonStyle from '../styles';
 import Button from 'react-native-smart-button'
-
-const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 10 : 0);
+import TitleBar from '../components/TitleBar';
 
 const STORE_DATA = {
     "api": "GetStoreList",
@@ -151,26 +149,8 @@ export default class SystemNotificationPage extends Component {
     render() {
         return (
             <View>
-                <View style={{ backgroundColor: '#2bb4f7', height: STATUS_BAR_HEIGHT }}></View>
-                <View style={CommonStyle.topbar_bg}>
-                    <TouchableOpacity onPress={() => { } }
-                        style={CommonStyle.topbar_left_item}>
-                        <Image
-                            style={{ width: 22, height: 22 }}
-                            source={require('../imgs/arrow_left.png') }
-                            />
-                    </TouchableOpacity>
-                    <View style={CommonStyle.topbar_center_bg}>
-                        <Text style={CommonStyle.topbar_center_tv}>系统通知</Text>
-                    </View>
-                    <TouchableOpacity onPress={() => { } }
-                        style={CommonStyle.topbar_right_item}>
-                        <Image
-                            style={{ width: 22, height: 22 }}
-                            source={require('../imgs/icon_power.png') }
-                            />
-                    </TouchableOpacity>
-                </View>
+                <TitleBar isMainView={false}  title="系统通知" onLeftClick={() => { toastShort("left") } } onRightClick={() => { toastShort("right") } }/>
+
                 <ScrollView
                     style={ { flex: 1 } }
                     showsVerticalScrollIndicator={ false }>
