@@ -44,7 +44,7 @@ const CommonStyle = StyleSheet.create({
     }
 });
 const TitleBar = ({isMainView, title, onLeftClick, onRightClick}) => {
-    let statusBar = STATUS_BAR_HEIGHT == 0 ? <View></View> : <View style={{ backgroundColor: '#2bb4f7', height: STATUS_BAR_HEIGHT }}></View>;
+    let statusBar = STATUS_BAR_HEIGHT == 0 ? <View></View> : <View style={{ backgroundColor: ThemeColor, height: STATUS_BAR_HEIGHT }}></View>;
 
     let leftImage = isMainView ?
         <Image

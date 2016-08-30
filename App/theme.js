@@ -1,2 +1,2 @@
-const ThemeColor = '#2bb4f7';
+const ThemeColor = '#1ba0ec';
 export default ThemeColor;
