@@ -73,6 +73,7 @@ class PaymentList extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            selectedLeft:true,
             dataSource: ds.cloneWithRows([]),
             rows: rows
         }
@@ -87,6 +88,7 @@ class PaymentList extends Component {
 
     //here left means "应收款缴费汇总表"
     _updateListViewDataSource(isLeft) {
+
         if (isLeft) {
             toastShort("left");
             this.state.rows.splice(0, this.state.rows.length);
@@ -98,6 +100,7 @@ class PaymentList extends Component {
         }
         this.setState({
             dataSource: ds.cloneWithRows(this.state.rows),
+            selectedLeft:isLeft
         });
     }
 
@@ -145,7 +148,7 @@ class PaymentList extends Component {
     render() {
         return (<View>
             <TitleBar  isMain={false} title="缴费汇总表" onLeftClick = {() => { toastShort("缴费汇总表") } }/>
-            <ToggleBar leftTitle="应收款缴费汇总表" rightTitle="其他缴费汇总表"
+            <ToggleBar selectedLeft={this.state.selectedLeft} leftTitle="应收款缴费汇总表" rightTitle="其他缴费汇总表"
                 onLeftClick={() => this._updateListViewDataSource(true) }
                 onRightClick={() =>
                     this._updateListViewDataSource(false)
