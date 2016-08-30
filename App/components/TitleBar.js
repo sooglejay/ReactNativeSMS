@@ -1,14 +1,14 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, StatusBar, Text, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
-
+import ThemeColor from '../theme';
 const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 10 : 0);
 const CommonStyle = StyleSheet.create({
     topbar_bg: {
         height: 48,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#2bb4f7',
+        backgroundColor: ThemeColor,
         flexDirection: 'row'
     },
     topbar_left_item: {

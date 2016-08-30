@@ -125,8 +125,9 @@
 
 // AppRegistry.registerComponent('SMS', () => AwesomeProject);
 
-
 import React,{Component} from 'react';
 import {AppRegistry} from 'react-native';
 import RootApp from './App/Root'
-AppRegistry.registerComponent('SMS',()=>RootApp);
+
+import test from './App/pages/PaymentList';
+AppRegistry.registerComponent('SMS',()=>test);
