@@ -8,6 +8,12 @@ import { toastShort } from '../utils/ToastUtil';
 import CommonStyle from '../styles';
 const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 10 : 0);
 
+const RowComponent = (props) => 
+    <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>
+        <Text style={{ color: '#666666', fontSize: 12, flex: 1, alignSelf: 'flex-start' }}>{props.key}</Text>
+        <Text style={{ color: '#666666', fontSize: 12 }}>{props.value}</Text>
+    </TouchableOpacity>
+
 export default class IndividualCenterPage extends Component {
     render() {
         return (
@@ -45,11 +51,8 @@ export default class IndividualCenterPage extends Component {
 
                         <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
 
-                        <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>
-                            <Text style={{ color: '#666666', fontSize: 12, flex: 1, alignSelf: 'flex-start' }}>我的院系</Text>
-                            <Text style={{ color: '#666666', fontSize: 12 }}>建设与管理工程学院</Text>
-                        </TouchableOpacity>
-
+<RowComponent key="我的院系" value="建设与管理工程学院" />
+                        
 
 
                         <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>
