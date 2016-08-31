@@ -63,7 +63,7 @@ class Login extends Component {
                 source={ require('../imgs/login/icon_user.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
-                style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                style={ { marginLeft:10,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                 placeholder="请输入用户名"
                 placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
@@ -86,18 +86,17 @@ class Login extends Component {
                   style={ { width: 30, height: 30, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
-            <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', marginLeft: 12, marginRight: 12, marginBottom: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
+            <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
                 source={ require('../imgs/login/icon_password.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
-                style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                style={ { marginLeft:10,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                 placeholder="请输入密码"
-                placeholderTextColor="#ffffff"
+                placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
                 numberOfLines={ 1 }
                 ref="password"
-                multiline={ true }
                 secureTextEntry={ true }
                 returnKeyType="next"
                 blurOnSubmit={ false }
@@ -112,7 +111,7 @@ class Login extends Component {
                 } }
                 style={ { width: 45, height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Image
-                  source={ require('../imgs/login/icon_tag.png') }
+                  source={ require('../imgs/login/icon_clear.png') }
                   style={ { width: 30, height: 30, marginLeft: 12 } } />
               </TouchableOpacity>
             </View>
@@ -122,7 +121,7 @@ class Login extends Component {
                   source={ require('../imgs/login/icon_tag.png') }
                   style={ { width: 30, height: 30, marginLeft: 12 } } />
                 <TextInput
-                  style={ { flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
+                  style={ { marginLeft:10,flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
                   placeholder="请输入验证码"
                   placeholderTextColor="#ffffff"
                   underlineColorAndroid="transparent"
