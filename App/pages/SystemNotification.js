@@ -187,6 +187,6 @@ export default class SystemNotificationPage extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.ThemeColor
+        backgroundColor:AppTheme.SeparatorColor
     }
 });

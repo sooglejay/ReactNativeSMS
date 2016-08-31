@@ -214,7 +214,7 @@ class ReceivablePaymentStatistics extends Component {
 const styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.ThemeColor
+        backgroundColor:AppTheme.SeparatorColor
     }
 });
 export default ReceivablePaymentStatistics;
