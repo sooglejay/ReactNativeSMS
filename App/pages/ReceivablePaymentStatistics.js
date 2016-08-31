@@ -13,64 +13,76 @@ const ReceivablePaymentStatisticsData = {
         "id": 1,
         "kind": "学费",
         "serialNumber": "003975",
-        "money": '0.04',
+        "moneyShouldPay": '0.04',
+        "moneyPayed": '0.01',
+        'moneyMinus': '0.01',
+        'moneyBack': '0.01',
+        'moneyArrears': '0.01',
         sectionID: "2016年",
-        "method": "网上支付",
-        "date": "2016-05-28",
     }, {
             "id": 2,
             "kind": "住宿费",
             "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
+            "moneyShouldPay": '0.04',
+            "moneyPayed": '0.01',
+            'moneyMinus': '0.01',
+            'moneyBack': '0.01',
+            'moneyArrears': '0.01',
             sectionID: "2016年",
-            "date": "2016-05-29",
         }, {
             "id": 3,
             "kind": "恋爱经费",
             "serialNumber": "003975",
-            "money": '0.04',
+            "moneyShouldPay": '0.04',
+            "moneyPayed": '0.01',
+            'moneyMinus': '0.01',
+            'moneyBack': '0.01',
+            'moneyArrears': '0.01',
             sectionID: "2017年",
-            "method": "网上支付",
-            "date": "2016-05-30",
         }, {
             "id": 4,
             "kind": "房费",
             "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2016-05-31",
+            "moneyShouldPay": '0.04',
+            "moneyPayed": '0.01',
+            'moneyMinus': '0.01',
+            'moneyBack': '0.01',
+            'moneyArrears': '0.01',
             sectionID: "2017年",
         }, {
             "id": 5,
             "kind": "礼物费",
             "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2016-06-1",
+            "moneyShouldPay": '0.04',
+            "moneyPayed": '0.01',
+            'moneyMinus': '0.01',
+            'moneyBack': '0.01',
+            'moneyArrears': '0.01',
             sectionID: "2017年",
         }, {
             "id": 6,
             "kind": "学杂费",
             "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2018-06-1",
+            "moneyShouldPay": '0.04',
+            "moneyPayed": '0.01',
+            'moneyMinus': '0.01',
+            'moneyBack': '0.01',
+            'moneyArrears': '0.01',
             sectionID: "2018年",
         },
         {
             "id": 7,
             "kind": "把妹飞",
             "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2018-06-2",
+            "moneyShouldPay": '0.04',
+            "moneyPayed": '0.01',
+            'moneyMinus': '0.01',
+            'moneyBack': '0.01',
+            'moneyArrears': '0.01',
             sectionID: "2018年",
         }
     ]
 };
-
-
 
 class ReceivablePaymentStatistics extends Component {
     _getInitialState() {
@@ -161,11 +173,12 @@ class ReceivablePaymentStatistics extends Component {
                         flex: 1,
                         backgroundColor: 'white',
                     }}>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.serialNumber}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.money}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.method}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.date}</Text>
+                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
+                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>应缴费金额(元): {rowData.moneyShouldPay}</Text>
+                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>已缴费金额(元): {rowData.moneyPayed}</Text>
+                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>减免金额(元): {rowData.moneyMinus}</Text>
+                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>退费金额(元): {rowData.moneyBack}</Text>
+                        <Text style={{ marginLeft: 10,marginBottom:6, marginTop:6,color: '#323232', fontSize: 11 }}>欠费金额(元): {rowData.moneyArrears}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -174,7 +187,7 @@ class ReceivablePaymentStatistics extends Component {
     _renderSectionHeader(sectionData, sectionID) {
         return (
             <View style={{ backgroundColor: '#f5f5f5', padding: 10 }}>
-                <Text>{sectionData}</Text>
+                <Text style={{ fontSize: 18 }}>{sectionData}</Text>
             </View>
         )
     }
