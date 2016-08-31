@@ -63,7 +63,7 @@ class Login extends Component {
                 source={ require('../imgs/login/icon_user.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
-                style={ { marginLeft:10,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                style={ { paddingLeft:14,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                 placeholder="请输入用户名"
                 placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
@@ -91,7 +91,7 @@ class Login extends Component {
                 source={ require('../imgs/login/icon_password.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
-                style={ { marginLeft:10,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                style={ { paddingLeft:14,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                 placeholder="请输入密码"
                 placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
@@ -121,7 +121,7 @@ class Login extends Component {
                   source={ require('../imgs/login/icon_tag.png') }
                   style={ { width: 30, height: 30, marginLeft: 12 } } />
                 <TextInput
-                  style={ { marginLeft:10,flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
+                  style={ { paddingLeft:14,flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
                   placeholder="请输入验证码"
                   placeholderTextColor="#ffffff"
                   underlineColorAndroid="transparent"
@@ -141,7 +141,7 @@ class Login extends Component {
               </TouchableOpacity>
               <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text numberOfLines={1} style={ { color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
-                  看不见0
+                  看不见？
                 </Text>
               </TouchableOpacity>
             </View>
