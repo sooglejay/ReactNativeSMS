@@ -6,6 +6,9 @@ import ShortColumn from '../components/ShortColumn';
 import TitleBar from '../components/TitleBar';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import {toastShort} from '../utils/ToastUtil';
+import PaymentSummary from './PaymentSummary';
+import PaymentDetail from './PaymentDetail';
+
 const BANNER_IMGS = [
   require('../imgs/icon_university.png'),
   require('../imgs/icon_university.png'),
@@ -61,12 +64,23 @@ export default class Index extends Component {
     this.handleNavigator = this.handleNavigator.bind(this);
   }
   handleNavigator(position) {
+    const {navigator} = this.props;
     switch (position) {
       case 0:
-        toastShort('0');
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: PaymentSummary,
+            title: 'PaymentSummary'
+          });
+        });
         break;
       case 1:
-        toastShort('1');
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: PaymentDetail,
+            title: 'PaymentDetail'
+          });
+        });
         break;
       case 2:
         toastShort('2');

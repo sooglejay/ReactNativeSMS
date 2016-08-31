@@ -1,7 +1,7 @@
 
 'use strict';
 import React, { Component } from 'react';
-import {     AppRegistry,
+import {   InteractionManager,  AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import ToggleBar from '../components/ToggleBar';
@@ -75,17 +75,24 @@ class PaymentSummary extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedLeft:true,
+            selectedLeft: true,
             dataSource: ds.cloneWithRows([]),
             rows: rows
         }
         this._renderRow = this._renderRow.bind(this);
         this._onItemClick = this._onItemClick.bind(this);
+        this._back = this._back.bind(this);
     }
     componentDidMount() {
         this.setState({
             dataSource: ds.cloneWithRows(this.state.rows)
         })
+    }
+    _back() {
+        const {navigator} = this.props;
+        InteractionManager.runAfterInteractions(() => {
+            navigator.pop();
+        });
     }
 
     //here left means "应收款缴费汇总表"
@@ -101,11 +108,11 @@ class PaymentSummary extends Component {
         }
         this.setState({
             dataSource: ds.cloneWithRows(this.state.rows),
-            selectedLeft:isLeft
+            selectedLeft: isLeft
         });
     }
 
-    _onItemClick(rowData,rowID) {
+    _onItemClick(rowData, rowID) {
         this.state.rows.splice(rowID, 1);
         this.setState({
             dataSource: ds.cloneWithRows(this.state.rows),
@@ -126,7 +133,7 @@ class PaymentSummary extends Component {
         let backgroundColor = rowID % 2 !== 0 ? '#f5f5f5' : 'white';
         return (
             <View key={rowData.id}>
-                <TouchableOpacity onPress={() => this._onItemClick(rowData,rowID) }>
+                <TouchableOpacity onPress={() => this._onItemClick(rowData, rowID) }>
                     <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -148,7 +155,7 @@ class PaymentSummary extends Component {
 
     render() {
         return (<View>
-            <TitleBar  isMain={false} title="缴费汇总表" onLeftClick = {() => { toastShort("缴费汇总表") } }/>
+            <TitleBar  isMain={false} title="缴费汇总表" onLeftClick = {this._back}/>
             <ToggleBar selectedLeft={this.state.selectedLeft} leftTitle="应收款缴费汇总表" rightTitle="其他缴费汇总表"
                 onLeftClick={() => this._updateListViewDataSource(true) }
                 onRightClick={() =>
@@ -173,7 +180,7 @@ class PaymentSummary extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.SeparatorColor
+        backgroundColor: AppTheme.SeparatorColor
     }
 });
 export default PaymentSummary;

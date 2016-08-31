@@ -23,7 +23,7 @@ class Splash extends React.Component {
       InteractionManager.runAfterInteractions(() => {
         navigator.resetTo({
           component: Login,
-          name: 'Login'
+          title: 'Login'
         });
       });
     }, 1);

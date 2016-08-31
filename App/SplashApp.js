@@ -28,11 +28,11 @@ class SplashApp extends React.Component {
     let Component = route.component;
     _navigator = navigator;
     return (
-      
-        <Component
-          route={ route } 
-          navigator={ navigator }
-          />
+
+      <Component
+        {...route.params}
+        navigator={ navigator }
+        />
     );
   }
 
@@ -48,7 +48,7 @@ class SplashApp extends React.Component {
           style={ styles.navigator }
           configureScene={ this.configureScene }
           renderScene={ this.renderScene }
-          initialRoute={ { component: Splash, title: 'Splash'} } />
+          initialRoute={ { component: Splash, title: 'Splash' } } />
       </View>
     );
   }

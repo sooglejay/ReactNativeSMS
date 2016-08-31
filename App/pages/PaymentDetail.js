@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import {     AppRegistry,
+import {  InteractionManager, AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import * as AppTheme from '../theme';
@@ -143,9 +143,16 @@ class PaymentDetail extends Component {
     constructor(props) {
         super(props);
         this._renderRow = this._renderRow.bind(this);
+        this._back = this._back.bind(this);
+
         this.state = this._getInitialState();
     }
-  
+    _back() {
+        const {navigator} = this.props;
+        InteractionManager.runAfterInteractions(() => {
+            navigator.pop();
+        });
+    }
     _renderSeparatorView(sectionID, rowID, adjacentRowHighlighted) {
         return (
             <View key={`${sectionID}-${rowID}`} style={styles.separator} />
@@ -162,10 +169,10 @@ class PaymentDetail extends Component {
                         backgroundColor: 'white',
                     }}>
                         <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据编号:{rowData.serialNumber}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据金额(元):{rowData.money}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>结算方式:{rowData.method}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据日期:{rowData.date}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据编号: {rowData.serialNumber}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据金额(元): {rowData.money}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>结算方式: {rowData.method}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据日期: {rowData.date}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -174,7 +181,7 @@ class PaymentDetail extends Component {
     _renderSectionHeader(sectionData, sectionID) {
         return (
             <View style={{ backgroundColor: '#f5f5f5', padding: 10 }}>
-                <Text style={{fontSize:18}}>{sectionData}</Text>
+                <Text style={{ fontSize: 18 }}>{sectionData}</Text>
             </View>
         )
     }
@@ -182,7 +189,7 @@ class PaymentDetail extends Component {
 
     render() {
         return (<View>
-            <TitleBar title="缴费明细表"/>
+            <TitleBar onLeftClick={this._back} title="缴费明细表"/>
             <View style={{ flex: 1 }}>
                 <ListView
                     initialListSize={1}
@@ -201,7 +208,7 @@ class PaymentDetail extends Component {
 const styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.SeparatorColor
+        backgroundColor: AppTheme.SeparatorColor
     }
 });
 export default PaymentDetail;

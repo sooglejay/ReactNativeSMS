@@ -40,14 +40,12 @@ class Login extends Component {
   btnLoginClick() {
     // toastShort("you ");
     const {navigator} = this.props;
-    this.timer = setTimeout(() => {
-      InteractionManager.runAfterInteractions(() => {
-        navigator.resetTo({
-          component: AppWrapper,
-          title: '首页'
-        });
+    InteractionManager.runAfterInteractions(() => {
+      navigator.resetTo({
+        component: AppWrapper,
+        title: '首页'
       });
-    }, 2);
+    });
   }
   render() {
     return (
@@ -143,7 +141,7 @@ class Login extends Component {
                 <Image source={ { width: 100, height: 38, uri: 'http://220.166.172.33/Account/GetValidateCode' } } />
               </TouchableOpacity>
               <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
-                <Text numberOfLines={1} style={ {  color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
+                <Text numberOfLines={1} style={ { color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
                   看不见0
                 </Text>
               </TouchableOpacity>

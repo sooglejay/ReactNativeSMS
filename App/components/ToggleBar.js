@@ -1,7 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, StatusBar, Text, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
-import ThemeColor from '../theme';
+import * as AppTheme from '../theme';
+var ThemeColor = AppTheme.ThemeColor;
 
 const ToggleBar = ({selectedLeft, leftTitle, rightTitle, onLeftClick, onRightClick}) => <View style={{ backgroundColor: '#f5f5f5', flexDirection: 'row', justifyContent: 'center', }}>
     <View style={{ flex: 1, justifyContent: 'center', flexDirection: 'row', borderColor: ThemeColor, borderRadius: 4, borderWidth: 1, margin: 10, }}>
