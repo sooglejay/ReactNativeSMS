@@ -69,7 +69,7 @@ let rows = [...LeftData.data];
 let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { r1 !== r2 } });
 
 
-class PaymentList extends Component {
+class PaymentSummary extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -174,4 +174,4 @@ let styles = StyleSheet.create({
         backgroundColor: '#eee'
     }
 });
-export default PaymentList;
+export default PaymentSummary;

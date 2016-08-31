@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class IndexPage extends Component {
+export default class Index extends Component {
   _renderDotIndicator() {
     return <PagerDotIndicator pageCount={ 4 } />;
   }

@@ -41,7 +41,7 @@ const ContainerComponent = () =>
         </View>
     </ScrollView>
 
-export default class IndividualCenterPage extends Component {
+export default class IndividualCenter extends Component {
     render() {
         return (
             <View>

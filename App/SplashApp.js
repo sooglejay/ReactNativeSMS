@@ -30,7 +30,7 @@ class SplashApp extends React.Component {
     return (
       
         <Component
-          { ...route }
+          route={ route } 
           navigator={ navigator }
           />
     );

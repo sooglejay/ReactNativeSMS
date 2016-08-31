@@ -5,7 +5,7 @@ import TextField from 'react-native-md-textinput';
 import ShortLineTwo from '../components/ShortLineTwo';
 import { toastShort } from '../utils/ToastUtil';
 
-import IndexApp from './IndexApp';
+import AppWrapper from './AppWrapper';
 var EncryptionModule = NativeModules.EncryptionModule;
 
 
@@ -43,7 +43,7 @@ class Login extends Component {
     this.timer = setTimeout(() => {
       InteractionManager.runAfterInteractions(() => {
         navigator.resetTo({
-          component: IndexApp,
+          component: AppWrapper,
           title: '首页'
         });
       });

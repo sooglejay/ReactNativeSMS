@@ -5,16 +5,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
-import IndexPage from './IndexPage';
-import SystemNotificationPage from './SystemNotificationPage';
-import IndividualCenterPage from './IndividualCenterPage';
+import Index from './Index';
+import SystemNotification from './SystemNotification';
+import IndividualCenter from './IndividualCenter';
 import Badge from 'react-native-smart-badge'
 
-export default class AppMain extends Component {
+export default class AppWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'IndexPage'
+      selectedTab: 'Index'
     };
   }
   render() {
@@ -22,7 +22,7 @@ export default class AppMain extends Component {
       <TabNavigator>
         <TabNavigator.Item
 					title="首页"
-					selected={ this.state.selectedTab === 'IndexPage' }
+					selected={ this.state.selectedTab === 'Index' }
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => <Image
@@ -32,14 +32,14 @@ export default class AppMain extends Component {
 						source={ require("../imgs/index/icon_index_page_selected.png") }
 						style={ styles.iconStyle } /> }
 					onPress={ () => this.setState({
-						selectedTab: 'IndexPage'
+						selectedTab: 'Index'
 					}) }>
-          <IndexPage {...this.props}/>
+          <Index {...this.props}/>
         </TabNavigator.Item>
         <TabNavigator.Item
 					title="系统通知"
 					badgeText="9"
-					selected={ this.state.selectedTab === 'SystemNotificationPage' }
+					selected={ this.state.selectedTab === 'SystemNotification' }
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => {
@@ -61,13 +61,13 @@ export default class AppMain extends Component {
 							</View>);
 					} }
 					onPress={ () => this.setState({
-						selectedTab: 'SystemNotificationPage'
+						selectedTab: 'SystemNotification'
 					}) }>
-          <SystemNotificationPage {...this.props}/>
+          <SystemNotification {...this.props}/>
         </TabNavigator.Item>
         <TabNavigator.Item
 					title="个人中心"
-					selected={ this.state.selectedTab === 'IndividualCenterPage' }
+					selected={ this.state.selectedTab === 'IndividualCenter' }
 					selectedTitleStyle={ styles.selectedTextStyle }
 					titleStyle={ styles.textStyle }
 					renderIcon={ () => <Image
@@ -77,9 +77,9 @@ export default class AppMain extends Component {
 						source={ require("../imgs/individual_center/icon_individual_center_page_selected.png") }
 						style={ styles.iconStyle } /> }
 					onPress={ () => this.setState({
-						selectedTab: 'IndividualCenterPage'
+						selectedTab: 'IndividualCenter'
 					}) }>
-          <IndividualCenterPage {...this.props}/>
+          <IndividualCenter {...this.props}/>
         </TabNavigator.Item>
       </TabNavigator>
 		);
