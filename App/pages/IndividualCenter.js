@@ -14,7 +14,9 @@ const RowComponent = (props) =>
 const AvatarComponent = () =>
     <Image source={require('../imgs/icon_university.png') } style={{ height: 190, flex: 1, justifyContent: 'center' }} >
         <Image source={require('../imgs/icon_university.png') } style={{ height: 90, width: 90, alignSelf: 'center' }} />
-        <Text style={{ fontSize: 15, color: 'white', margin: 6, alignSelf: 'center' }} >刘连雨</Text>
+
+        <Text style={{ backgroundColor: 'transparent', margin: 6, color: 'black', fontSize: 22, alignSelf: 'center' }} >刘连雨</Text>
+
     </Image>
 
 const ContainerComponent = () =>
@@ -38,6 +40,8 @@ const ContainerComponent = () =>
             <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
             <RowComponent titleKey="开户银行"  titleValue="XXXXX" />
             <RowComponent titleKey="银行卡号"  titleValue="XXXXXXX" />
+            <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
+
         </View>
     </ScrollView>
 
