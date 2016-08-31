@@ -71,16 +71,20 @@ class FinishedOrderList extends Component {
         toastShort("hello item");
     }
     _renderHeader() {
-        return (<View style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between', backgroundColor: 'white'
-        }}>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单号</Text>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单时间</Text>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单金额(元) </Text>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单内容</Text>
-        </View>);
+        return (
+            <View>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between', backgroundColor: 'white'
+                }}>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单号</Text>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单时间</Text>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单金额(元) </Text>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>订单内容</Text>
+                </View>
+                <View style={styles.separator}/>
+            </View>);
     }
     //渲染每一项的数据
     _renderRow(rowData, sectionID, rowID) {
@@ -132,7 +136,7 @@ class FinishedOrderList extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.SeparatorColor
+        backgroundColor: AppTheme.SeparatorColor
     }
 });
 export default FinishedOrderList;

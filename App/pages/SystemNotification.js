@@ -103,15 +103,19 @@ export default class SystemNotificationPage extends Component {
         toastShort(item.name);
     }
     _renderHeader() {
-        return (<View style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between', backgroundColor: 'white'
-        }}>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>收费区间</Text>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>收费项目</Text>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>缴费金额(元) </Text>
-        </View>);
+        return (
+            <View>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between', backgroundColor: 'white'
+                }}>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>收费区间</Text>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>收费项目</Text>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>缴费金额(元) </Text>
+                </View>
+                <View style={styles.separator}/>
+            </View>);
     }
     _renderFooter() {
         return (
@@ -167,7 +171,7 @@ export default class SystemNotificationPage extends Component {
                             </TouchableOpacity>
                         </View>
 
-                        <View>
+                        <View style={styles.separator}>
                         </View>
 
                         <View style={{ flex: 1 }}>
@@ -187,6 +191,6 @@ export default class SystemNotificationPage extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.SeparatorColor
+        backgroundColor: AppTheme.SeparatorColor
     }
 });

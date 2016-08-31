@@ -5,6 +5,7 @@ import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import TitleBar from '../components/TitleBar';
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
+import {toastShort} from '../utils/ToastUtil';
 const BANNER_IMGS = [
   require('../imgs/icon_university.png'),
   require('../imgs/icon_university.png'),
@@ -55,6 +56,36 @@ const styles = StyleSheet.create({
 });
 
 export default class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.handleNavigator = this.handleNavigator.bind(this);
+  }
+  handleNavigator(position) {
+    switch (position) {
+      case 0:
+        toastShort('0');
+        break;
+      case 1:
+        toastShort('1');
+        break;
+      case 2:
+        toastShort('2');
+        break;
+      case 3:
+        toastShort('3');
+        break;
+      case 4:
+        toastShort('4');
+        break;
+      case 5:
+        toastShort('5');
+        break;
+      case 6:
+        toastShort('6');
+        break;
+    }
+
+  }
   _renderDotIndicator() {
     return <PagerDotIndicator pageCount={ 4 } />;
   }
@@ -84,7 +115,7 @@ export default class Index extends Component {
             </IndicatorViewPager>
             <View style={styles.viewWapperStyle}>
               <View style={ styles.viewRowStyle }>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
+                <TouchableOpacity onPress={() => this.handleNavigator(0) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
@@ -95,7 +126,7 @@ export default class Index extends Component {
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
+                <TouchableOpacity onPress={() => this.handleNavigator(1) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
@@ -106,7 +137,7 @@ export default class Index extends Component {
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
+                <TouchableOpacity onPress={() => this.handleNavigator(2) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
@@ -119,7 +150,7 @@ export default class Index extends Component {
               </View>
               <ShortLine/>
               <View style={ styles.viewRowStyle }>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
+                <TouchableOpacity  onPress={() => this.handleNavigator(3) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
@@ -130,7 +161,7 @@ export default class Index extends Component {
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
+                <TouchableOpacity onPress={() => this.handleNavigator(4) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
@@ -141,7 +172,7 @@ export default class Index extends Component {
                   </View>
                 </TouchableOpacity>
                 <ShortColumn/>
-                <TouchableOpacity style={ styles.touchableOpacityStyle }>
+                <TouchableOpacity  onPress={() => this.handleNavigator(5) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
@@ -154,7 +185,7 @@ export default class Index extends Component {
               </View>
               <ShortLine/>
               <View style={ styles.viewRowStyle}>
-                <TouchableOpacity style={styles.touchableOpacityStyle }>
+                <TouchableOpacity  onPress={() => this.handleNavigator(6) } style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
                       source={ require('../imgs/icon_university.png') }
