@@ -82,7 +82,7 @@ class FinishedOrderList extends Component {
     }
     //渲染每一项的数据
     _renderRow(rowData, sectionID, rowID) {
-        let backgroundColor = rowID % 2 !== 0 ? '#f5f5f5' : 'white';
+        let backgroundColor = rowID % 2 == 0 ? '#f5f5f5' : 'white';
         return (
             <View key={rowData.id}>
                 <TouchableOpacity onPress={() => this._onItemClick(rowData, rowID) }>
