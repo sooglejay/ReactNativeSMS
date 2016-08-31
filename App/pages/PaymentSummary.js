@@ -6,6 +6,8 @@ import {     AppRegistry,
 import TitleBar from '../components/TitleBar';
 import ToggleBar from '../components/ToggleBar';
 import {toastShort} from '../utils/ToastUtil';
+import * as AppTheme from '../theme';
+
 const LeftData = {
     "api": "GetStoreList",
     "v": "1.0",
@@ -171,7 +173,7 @@ class PaymentSummary extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor: '#eee'
+        backgroundColor:AppTheme.ThemeColor
     }
 });
 export default PaymentSummary;

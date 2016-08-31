@@ -7,6 +7,7 @@ import ShortColumn from '../components/ShortColumn';
 import { toastShort } from '../utils/ToastUtil';
 import Button from 'react-native-smart-button'
 import TitleBar from '../components/TitleBar';
+import * as AppTheme from '../theme';
 
 const STORE_DATA = {
     "api": "GetStoreList",
@@ -186,6 +187,6 @@ export default class SystemNotificationPage extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor: '#eee'
+        backgroundColor:AppTheme.ThemeColor
     }
 });

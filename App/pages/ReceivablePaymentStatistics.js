@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {     AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
+import * as AppTheme from '../theme';
 
 const ReceivablePaymentStatisticsData = {
     "api": "GetStoreList",
@@ -213,7 +214,7 @@ class ReceivablePaymentStatistics extends Component {
 const styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor: '#eee'
+        backgroundColor:AppTheme.ThemeColor
     }
 });
 export default ReceivablePaymentStatistics;

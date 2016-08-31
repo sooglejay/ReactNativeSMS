@@ -1,14 +1,14 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, StatusBar, Text, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
-import ThemeColor from '../theme';
+import * as AppTheme from '../theme';
 const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 10 : 0);
 const CommonStyle = StyleSheet.create({
     topbar_bg: {
         height: 48,
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: ThemeColor,
+        backgroundColor: AppTheme.ThemeColor,
         flexDirection: 'row'
     },
     topbar_left_item: {
@@ -44,7 +44,7 @@ const CommonStyle = StyleSheet.create({
     }
 });
 const TitleBar = ({isMainView, title, onLeftClick, onRightClick}) => {
-    let statusBar = STATUS_BAR_HEIGHT == 0 ? <View></View> : <View style={{ backgroundColor: ThemeColor, height: STATUS_BAR_HEIGHT }}></View>;
+    let statusBar = STATUS_BAR_HEIGHT == 0 ? <View></View> : <View style={{ backgroundColor: AppTheme.ThemeColor, height: STATUS_BAR_HEIGHT }}></View>;
 
     let leftImage = isMainView ?
         <Image

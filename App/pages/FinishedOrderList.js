@@ -5,6 +5,8 @@ import {     AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import {toastShort} from '../utils/ToastUtil';
+import * as AppTheme from '../theme';
+
 const OrderFinishedData = {
     "api": "GetStoreList",
     "v": "1.0",
@@ -130,7 +132,7 @@ class FinishedOrderList extends Component {
 let styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor: '#eee'
+        backgroundColor:AppTheme.ThemeColor
     }
 });
 export default FinishedOrderList;
