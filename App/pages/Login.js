@@ -60,7 +60,7 @@ class Login extends Component {
             </Text>
             <View style={ { flexDirection: 'row', backgroundColor: '#72cdf7', margin: 12, borderRadius: 9, height: 45, alignItems: 'center' } }>
               <Image
-                source={ require('../imgs/login/icon_user_name.png') }
+                source={ require('../imgs/login/icon_user.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
                 style={ { height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
