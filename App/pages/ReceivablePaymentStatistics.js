@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import {     AppRegistry,
+import {  InteractionManager,   AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import * as AppTheme from '../theme';
@@ -156,9 +156,15 @@ class ReceivablePaymentStatistics extends Component {
     constructor(props) {
         super(props);
         this._renderRow = this._renderRow.bind(this);
+        this._back = this._back.bind(this);
         this.state = this._getInitialState();
     }
-
+    _back() {
+        const {navigator} = this.props;
+        InteractionManager.runAfterInteractions(() => {
+            navigator.pop();
+        });
+    }
     _renderSeparatorView(sectionID, rowID, adjacentRowHighlighted) {
         return (
             <View key={`${sectionID}-${rowID}`} style={styles.separator} />
@@ -174,12 +180,12 @@ class ReceivablePaymentStatistics extends Component {
                         flex: 1,
                         backgroundColor: 'white',
                     }}>
-                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
-                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>应缴费金额(元): {rowData.moneyShouldPay}</Text>
-                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>已缴费金额(元): {rowData.moneyPayed}</Text>
-                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>减免金额(元): {rowData.moneyMinus}</Text>
-                        <Text style={{ marginLeft: 10, marginTop:6,color: '#323232', fontSize: 11 }}>退费金额(元): {rowData.moneyBack}</Text>
-                        <Text style={{ marginLeft: 10,marginBottom:6, marginTop:6,color: '#323232', fontSize: 11 }}>欠费金额(元): {rowData.moneyArrears}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>应缴费金额(元): {rowData.moneyShouldPay}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>已缴费金额(元): {rowData.moneyPayed}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>减免金额(元): {rowData.moneyMinus}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>退费金额(元): {rowData.moneyBack}</Text>
+                        <Text style={{ marginLeft: 10, marginBottom: 6, marginTop: 6, color: '#323232', fontSize: 11 }}>欠费金额(元): {rowData.moneyArrears}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -195,7 +201,7 @@ class ReceivablePaymentStatistics extends Component {
 
     render() {
         return (<View>
-            <TitleBar title="应收款缴费统计表"/>
+            <TitleBar  onLeftClick={this._back} title="应收款缴费统计表"/>
             <View style={{ flex: 1 }}>
                 <ListView
                     initialListSize={1}
@@ -214,7 +220,7 @@ class ReceivablePaymentStatistics extends Component {
 const styles = StyleSheet.create({
     separator: {
         height: 1,
-        backgroundColor:AppTheme.SeparatorColor
+        backgroundColor: AppTheme.SeparatorColor
     }
 });
 export default ReceivablePaymentStatistics;

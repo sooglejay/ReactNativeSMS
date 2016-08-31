@@ -8,6 +8,10 @@ import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import {toastShort} from '../utils/ToastUtil';
 import PaymentSummary from './PaymentSummary';
 import PaymentDetail from './PaymentDetail';
+import ReceivablePaymentStatistics from './ReceivablePaymentStatistics';
+import FinishedOrderList from './FinishedOrderList';
+
+
 
 const BANNER_IMGS = [
   require('../imgs/icon_university.png'),
@@ -83,7 +87,12 @@ export default class Index extends Component {
         });
         break;
       case 2:
-        toastShort('2');
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: ReceivablePaymentStatistics,
+            title: 'ReceivablePaymentStatistics'
+          });
+        });
         break;
       case 3:
         toastShort('3');
@@ -95,7 +104,12 @@ export default class Index extends Component {
         toastShort('5');
         break;
       case 6:
-        toastShort('6');
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: FinishedOrderList,
+            title: 'FinishedOrderList'
+          });
+        });
         break;
     }
 

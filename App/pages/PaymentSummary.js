@@ -1,7 +1,7 @@
 
 'use strict';
 import React, { Component } from 'react';
-import {   InteractionManager,  AppRegistry,
+import {   InteractionManager, AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import ToggleBar from '../components/ToggleBar';
@@ -80,6 +80,7 @@ class PaymentSummary extends Component {
             rows: rows
         }
         this._renderRow = this._renderRow.bind(this);
+        this._renderHeader = this._renderHeader.bind(this);
         this._onItemClick = this._onItemClick.bind(this);
         this._back = this._back.bind(this);
     }
@@ -119,14 +120,20 @@ class PaymentSummary extends Component {
         });
     }
     _renderHeader() {
-        return (<View style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between', backgroundColor: 'white'
-        }}>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>类别</Text>
-            <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>金额(元) </Text>
-        </View>);
+        return (
+            <View>
+
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between', backgroundColor: 'white'
+                }}>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>类别</Text>
+                    <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>金额(元) </Text>
+
+                </View>
+                <View style={styles.separator} />
+            </View>);
     }
     //渲染每一项的数据
     _renderRow(rowData, sectionID, rowID) {
@@ -139,8 +146,8 @@ class PaymentSummary extends Component {
                         flexDirection: 'row',
                         justifyContent: 'space-between', backgroundColor: backgroundColor,
                     }}>
-                        <Text style={{ margin: 12, marginLeft: 20, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
-                        <Text style={{ margin: 12, marginRight: 20, color: '#323232', fontSize: 15 }}>{rowData.money}</Text>
+                        <Text style={{ margin: 12, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
+                        <Text style={{ margin: 12,  color: '#323232', fontSize: 15 }}>{rowData.money}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -161,19 +168,17 @@ class PaymentSummary extends Component {
                 onRightClick={() =>
                     this._updateListViewDataSource(false)
                 } />
-            <View style={{ flex: 1 }}>
-                <ListView
-                    initialListSize={1}
-                    enableEmptySections={true}
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderRow}
-                    style={{ backgroundColor: 'white', flex: 1 }}
-                    onEndReachedThreshold={10}
-                    enableEmptySections={true}
-                    renderHeader={this._renderHeader}
-                    renderSeparator={this._renderSeparatorView}
-                    />
-            </View>
+            <ListView
+                initialListSize={1}
+                enableEmptySections={true}
+                dataSource={this.state.dataSource}
+                renderRow={this._renderRow}
+                style={{ backgroundColor: 'white', flex: 1 }}
+                onEndReachedThreshold={10}
+                enableEmptySections={true}
+                renderHeader={this._renderHeader}
+                renderSeparator={this._renderSeparatorView}
+                />
         </View>);
     }
 };

@@ -1,7 +1,7 @@
 
 'use strict';
 import React, { Component } from 'react';
-import {     AppRegistry,
+import {    InteractionManager, AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import {toastShort} from '../utils/ToastUtil';
@@ -59,7 +59,14 @@ class FinishedOrderList extends Component {
             rows: rows
         }
         this._renderRow = this._renderRow.bind(this);
+        this._back = this._back.bind(this);
         this._onItemClick = this._onItemClick.bind(this);
+    }
+    _back() {
+        const {navigator} = this.props;
+        InteractionManager.runAfterInteractions(() => {
+            navigator.pop();
+        });
     }
     componentDidMount() {
         this.setState({
@@ -115,7 +122,7 @@ class FinishedOrderList extends Component {
 
     render() {
         return (<View>
-            <TitleBar  isMain={false} title="已完成订单" onLeftClick = {() => { toastShort("已完成订单") } }/>
+            <TitleBar  isMain={false} title="已完成订单" onLeftClick = {this._back}/>
 
             <View style={{ flex: 1 }}>
                 <ListView

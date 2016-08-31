@@ -105,6 +105,17 @@ export default class SystemNotificationPage extends Component {
     _renderHeader() {
         return (
             <View>
+                <View style={{ flexDirection: 'row', backgroundColor: '#f5f5f5', justifyContent: 'flex-start' }}>
+                    <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>
+                        <Image source={require('../imgs/icon_power.png') } style={{ width: 16, height: 16, marginRight: 6 }}/>
+                        <Text style={{ color: '#1ba0ec', fontSize: 15 }}>
+                            您有未完成的订单，请及时支付
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.separator}>
+                </View>
                 <View style={{
                     flex: 1,
                     flexDirection: 'row',
@@ -155,33 +166,10 @@ export default class SystemNotificationPage extends Component {
         return (
             <View>
                 <TitleBar isMainView={false}  title="系统通知" onLeftClick={() => { toastShort("left") } } onRightClick={() => { toastShort("right") } }/>
-
-                <ScrollView
-                    style={ { flex: 1 } }
-                    showsVerticalScrollIndicator={ false }>
-                    <View
-                        style={ { flex: 1 } }>
-
-                        <View style={{ flexDirection: 'row', backgroundColor: '#f5f5f5', justifyContent: 'flex-start' }}>
-                            <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>
-                                <Image source={require('../imgs/icon_power.png') } style={{ width: 16, height: 16, marginRight: 6 }}/>
-                                <Text style={{ color: '#1ba0ec', fontSize: 15 }}>
-                                    您有未完成的订单，请及时支付
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.separator}>
-                        </View>
-
-                        <View style={{ flex: 1 }}>
-                            {this.renderContent(this.state.dataSource.cloneWithRows(
-                                this.state.storeLists === undefined ? [] : this.state.storeLists)) }
-                        </View>
-                    </View>
-                </ScrollView>
-
-
+                <View style={{ flex: 1 }}>
+                    {this.renderContent(this.state.dataSource.cloneWithRows(
+                        this.state.storeLists === undefined ? [] : this.state.storeLists)) }
+                </View>
             </View>
 
         );
