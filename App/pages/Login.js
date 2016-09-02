@@ -1,9 +1,11 @@
 'use strict';
 import React, { Component, PropTypes } from "react";
-import { View, Text, ScrollView, BackAndroid, TouchableOpacity, Image, StyleSheet, InteractionManager, TextInput, Platform, ToastAndroid, NativeModules } from "react-native";
+import { View, AsyncStorage, Text, ScrollView, BackAndroid, TouchableOpacity, Image, StyleSheet, InteractionManager, TextInput, Platform, ToastAndroid, NativeModules } from "react-native";
 import TextField from 'react-native-md-textinput';
 import ShortLineTwo from '../components/ShortLineTwo';
 import { toastShort } from '../utils/ToastUtil';
+import {API_SERVER, HandShakeCode, bodyObj} from '../common/API.js';
+import {isLogined} from'../common/Storage';
 
 import AppWrapper from './AppWrapper';
 var EncryptionModule = NativeModules.EncryptionModule;
@@ -12,6 +14,7 @@ var EncryptionModule = NativeModules.EncryptionModule;
 var username = '';
 var password = '';
 var verifycode = '';
+
 
 
 class Login extends Component {
@@ -26,31 +29,30 @@ class Login extends Component {
   componentDidMount() {
     // loginRequestFromApiAsync();
   }
+  async foo() {
+    try {
+      await AsyncStorage.setItem(isLogined, "yes");
+      console.log("设置成功！");
+    } catch (error) {
+      // Error saving data
+    }
+  }
   loginRequestFromApiAsync() {
-    return fetch('http://115.28.177.161:8080/WebService.WebService/01', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: 'TRAN_CODE=0003&XH=4120154103202'
-    }).then((response) => {
-      if (response.status == 200) {
-        var output = '';
-        for (var property in response) {
-          output += property + ': ' + response[property] + ',';
-        }
-        console.log("HTTP 200 OK! jiangwei: " + output);
-        return response.json();
-      }
-      else {
-        console.log("出错啦 ! jiangwei ");
-        throw new Error('Something went wrong on api server!');
-      }
-    })
-      .then((responseJson) => {
-        console.log("出错啦 ! jiangwei "+ JSON.stringify(responseJson));
+    console.log('HandShakeCode.login' + HandShakeCode.login, "username=", username, " password=", password, "  verifycode=", verifycode);
 
+    return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.login + '&XH=' + username + '&MM=' + password))
+      .then((response) => {
+        if (response.status == 200) {
+          return response.json();
+        }
+        else {
+          toastShort('系统错误！');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+      .then((responseJson) => {
+        toastShort(responseJson.RTN_MESSAGE);
+        this.foo();
         this.setState({
           text: responseJson
         });
@@ -60,7 +62,7 @@ class Login extends Component {
       });
   }
   btnLoginClick() {
-    toastShort("you ");
+    toastShort("正在登录... ");
     this.loginRequestFromApiAsync();
 
     // const {navigator} = this.props;
@@ -88,7 +90,7 @@ class Login extends Component {
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
                 style={ { paddingLeft: 14, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
-                placeholder="请输入用户名"
+                placeholder="请输入学号"
                 placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
                 numberOfLines={ 1 }
