@@ -27,18 +27,30 @@ class Login extends Component {
     // loginRequestFromApiAsync();
   }
   loginRequestFromApiAsync() {
-    return fetch('http://facebook.github.io/react-native/movies.json')
-      .then((response) => {
-        if (response.status == 200) {
-          console.log("HTTP 200 OK! jiangwei ");
-          return response.json();
+    return fetch('http://115.28.177.161:8080/WebService.WebService/01', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: 'TRAN_CODE=0003&XH=4120154103202'
+    }).then((response) => {
+      if (response.status == 200) {
+        var output = '';
+        for (var property in response) {
+          output += property + ': ' + response[property] + ',';
         }
-        else {
-          console.log("出错啦 ! jiangwei ");
-          throw new Error('Something went wrong on api server!');
-        }
-      })
+        console.log("HTTP 200 OK! jiangwei: " + output);
+        return response.json();
+      }
+      else {
+        console.log("出错啦 ! jiangwei ");
+        throw new Error('Something went wrong on api server!');
+      }
+    })
       .then((responseJson) => {
+        console.log("出错啦 ! jiangwei "+ JSON.stringify(responseJson));
+
         this.setState({
           text: responseJson
         });
@@ -48,8 +60,8 @@ class Login extends Component {
       });
   }
   btnLoginClick() {
-      toastShort("you ");
-      this.loginRequestFromApiAsync();
+    toastShort("you ");
+    this.loginRequestFromApiAsync();
 
     // const {navigator} = this.props;
     // InteractionManager.runAfterInteractions(() => {
