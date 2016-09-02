@@ -21,13 +21,23 @@ class Login extends Component {
       text: {}
     }
     this.btnLoginClick = this.btnLoginClick.bind(this);
+    this.loginRequestFromApiAsync = this.loginRequestFromApiAsync.bind(this);
   }
   componentDidMount() {
     // loginRequestFromApiAsync();
   }
   loginRequestFromApiAsync() {
     return fetch('http://facebook.github.io/react-native/movies.json')
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status == 200) {
+          console.log("HTTP 200 OK! jiangwei ");
+          return response.json();
+        }
+        else {
+          console.log("出错啦 ! jiangwei ");
+          throw new Error('Something went wrong on api server!');
+        }
+      })
       .then((responseJson) => {
         this.setState({
           text: responseJson
@@ -38,14 +48,16 @@ class Login extends Component {
       });
   }
   btnLoginClick() {
-    // toastShort("you ");
-    const {navigator} = this.props;
-    InteractionManager.runAfterInteractions(() => {
-      navigator.resetTo({
-        component: AppWrapper,
-        title: '首页'
-      });
-    });
+      toastShort("you ");
+      this.loginRequestFromApiAsync();
+
+    // const {navigator} = this.props;
+    // InteractionManager.runAfterInteractions(() => {
+    //   navigator.resetTo({
+    //     component: AppWrapper,
+    //     title: '首页'
+    //   });
+    // });
   }
   render() {
     return (
@@ -63,7 +75,7 @@ class Login extends Component {
                 source={ require('../imgs/login/icon_user.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
-                style={ { paddingLeft:14,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                style={ { paddingLeft: 14, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                 placeholder="请输入用户名"
                 placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
@@ -91,7 +103,7 @@ class Login extends Component {
                 source={ require('../imgs/login/icon_password.png') }
                 style={ { width: 30, height: 30, marginLeft: 12 } } />
               <TextInput
-                style={ { paddingLeft:14,height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
+                style={ { paddingLeft: 14, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center', flex: 1 } }
                 placeholder="请输入密码"
                 placeholderTextColor="#ffffffff"
                 underlineColorAndroid="transparent"
@@ -121,7 +133,7 @@ class Login extends Component {
                   source={ require('../imgs/login/icon_tag.png') }
                   style={ { width: 30, height: 30, marginLeft: 12 } } />
                 <TextInput
-                  style={ { paddingLeft:14,flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
+                  style={ { paddingLeft: 14, flex: 1, height: 40, fontSize: 15, textAlign: 'left', textAlignVertical: 'center' } }
                   placeholder="请输入验证码"
                   placeholderTextColor="#ffffff"
                   underlineColorAndroid="transparent"
@@ -137,7 +149,8 @@ class Login extends Component {
                   } } />
               </View>
               <TouchableOpacity style={ { width: 100, height: 45, alignItems: 'center', justifyContent: 'center' } }>
-                <Image source={ { width: 100, height: 38, uri: 'http://220.166.172.33/Account/GetValidateCode' } } />
+                <Image source={{ uri: 'http://220.166.172.33/Account/GetValidateCode' }}
+                  style={{ width: 100, height: 40 }} />
               </TouchableOpacity>
               <TouchableOpacity style={ { height: 45, alignItems: 'center', justifyContent: 'center' } }>
                 <Text numberOfLines={1} style={ { color: '#ffffff', fontSize: 12, marginLeft: 2, } }>
@@ -145,6 +158,7 @@ class Login extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
+
             <TouchableOpacity
               onPress={ () => {
                 this.btnLoginClick();
