@@ -12,7 +12,7 @@ import {
 
 import Login from './Login';
 import AppMain from './AppWrapper';
-import {isLogined, value_isLogined} from'../common/Storage';
+import {key_isLogined, value_isLogined} from'../common/Storage';
 var {height, width} = Dimensions.get('window');
 
 class Splash extends React.Component {
@@ -22,7 +22,7 @@ class Splash extends React.Component {
   async foo() {
     let isLogined = '';
     try {
-      isLogined = await AsyncStorage.getItem(isLogined);
+      isLogined = await AsyncStorage.getItem(key_isLogined);
       if (isLogined !== null) {
         console.log("取登录的值不为null:" + isLogined);
         // We have data!!
