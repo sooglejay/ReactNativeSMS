@@ -5,7 +5,7 @@ import TextField from 'react-native-md-textinput';
 import ShortLineTwo from '../components/ShortLineTwo';
 import { toastShort } from '../utils/ToastUtil';
 import {API_SERVER, HandShakeCode, bodyObj} from '../common/API.js';
-import {key_isLogined,value_isLogined} from'../common/Storage';
+import {key_isLogined, value_isLogined,key_XH} from'../common/Storage';
 
 import AppWrapper from './AppWrapper';
 var EncryptionModule = NativeModules.EncryptionModule;
@@ -30,6 +30,7 @@ class Login extends Component {
     toastShort(responseJson.RTN_MESSAGE);
     try {
       await AsyncStorage.setItem(key_isLogined, value_isLogined);
+      await AsyncStorage.setItem(key_XH, username);
     } catch (error) {
       // Error saving data
     } finally {
@@ -37,7 +38,7 @@ class Login extends Component {
       InteractionManager.runAfterInteractions(() => {
         navigator.resetTo({
           component: AppWrapper,
-          title: '首页'
+          title: '首页',
         });
       });
     }

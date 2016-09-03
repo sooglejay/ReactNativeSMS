@@ -9,54 +9,39 @@ import Button from 'react-native-smart-button'
 import TitleBar from '../components/TitleBar';
 import * as AppTheme from '../theme';
 
-const STORE_DATA = {
-    "api": "GetStoreList",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "name": "学费",
-        "year": 2017,
-        "money": '11.00',
-    }, {
-            "id": 2,
-            "name": "学费",
-            "year": 2017,
-            "money": '11.00',
-        }, {
-            "id": 3,
-            "name": "学费",
-            "year": 2017,
-            "money": '11.00',
-        }, {
-            "id": 4,
-            "name": "学费",
-            "year": 2017,
-            "money": '11.00',
-        }, {
-            "id": 5,
-            "name": "学费",
-            "year": 2017,
-            "money": '11.00',
-        }
-    ]
-};
-
 
 export default class SystemNotificationPage extends Component {
     constructor(props) {
         super(props);
         this._onPressItem = this._onPressItem.bind(this);
+        this._renderFooter = this._renderFooter.bind(this);
+        this._renderHeader = this._renderHeader.bind(this);
+        this._renderSeparatorView = this._renderSeparatorView.bind(this);
+
+        console.log("test1:", props.hasSystemNotification);
+        var datas = props.systemNotifications;
+        for (var i = 0; i < datas.length; i++) {
+            datas[i].id = i;
+        }
         this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            storeLists: STORE_DATA.data,
+            storeLists: datas,
+            hasSystemNotification: props.hasSystemNotification,
         }
     }
     //进行渲染数据
-    renderContent(dataSource) {
+    renderContent(dataSource, hasSystemNotification) {
+        if (!hasSystemNotification) {
+            return <View style={{flex:1, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity style={{ flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ alignItems: 'center', justifyContent: 'center', color: '#1ba0ec', fontSize: 15 }}>
+                        暂无缴费通知
+                    </Text>
+                </TouchableOpacity>
+            </View>;
+        }
         return (
             <ListView
                 initialListSize={1}
@@ -65,26 +50,26 @@ export default class SystemNotificationPage extends Component {
                 style={{ backgroundColor: 'white', flex: 1 }}
                 onEndReachedThreshold={10}
                 enableEmptySections={true}
-                renderHeader={this._renderHeader}
-                renderFooter={this._renderFooter}
+                renderHeader={this._renderHeader }
+                renderFooter={this._renderFooter }
                 renderSeparator={this._renderSeparatorView}
                 />
         );
     }
     //渲染每一项的数据
     renderItem(data) {
-        let backgroundColor = data.id % 2 !== 0 ? '#f5f5f5' : 'white';
+        let backgroundColor = data.id % 2 === 0 ? '#f5f5f5' : 'white';
         return (
             <View key={data.id}>
-                <TouchableOpacity onPress={() => { toastShort("you ") } }>
+                <TouchableOpacity>
                     <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'space-between', backgroundColor: backgroundColor,
                     }}>
-                        <Text style={{ margin: 12, marginLeft: 20, color: '#323232', fontSize: 15 }}>{data.money}</Text>
-                        <Text style={{ margin: 12, marginRight: 20, color: '#323232', fontSize: 15 }}>{data.money}</Text>
-                        <Text style={{ margin: 12, marginRight: 20, color: '#323232', fontSize: 15 }}>{data.money}</Text>
+                        <Text style={{ margin: 12, marginLeft: 20, color: '#323232', fontSize: 15 }}>{data.TIME}</Text>
+                        <Text style={{ margin: 12, marginRight: 20, color: '#323232', fontSize: 15 }}>{data.TYPE}</Text>
+                        <Text style={{ margin: 12, marginRight: 20, color: '#323232', fontSize: 15 }}>{data.MONEY}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -127,6 +112,7 @@ export default class SystemNotificationPage extends Component {
                 </View>
                 <View style={styles.separator}/>
             </View>);
+
     }
     _renderFooter() {
         return (
@@ -135,7 +121,7 @@ export default class SystemNotificationPage extends Component {
                     <Button
                         touchableType={'highlight'}
                         underlayColor={'#f0f0f0f0'}
-                        style={{ flex: 1, margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
+                        style={{ flex: 1, margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: 1, borderColor: '#d5d5d5', justifyContent: 'center', }}
                         textStyle={{ fontSize: 15, color: '#333333' }}
                         >
                         <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
@@ -144,7 +130,7 @@ export default class SystemNotificationPage extends Component {
                     <Button
                         touchableType={'highlight'}
                         underlayColor={'#f0f0f0f0'}
-                        style={{ flex: 1, margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: '#d5d5d5', justifyContent: 'center', }}
+                        style={{ flex: 1, margin: 10, height: 40, backgroundColor: 'white', borderRadius: 3, borderWidth: 1, borderColor: '#d5d5d5', justifyContent: 'center', }}
                         textStyle={{ fontSize: 15, color: '#333333' }}
                         >
                         <Image source={require('../imgs/icon_delete.png') } style={{ width: 24, height: 24, marginRight: 3, }}/>
@@ -157,18 +143,18 @@ export default class SystemNotificationPage extends Component {
                     <Text style={{ color: '#666666', marginLeft: 12, marginTop: 12, fontSize: 13 }}>订单时间: 2016-07-04 11: 55: 14</Text>
                     <Text style={{ color: '#666666', marginLeft: 12, marginTop: 12, fontSize: 13, marginBottom: 12 }}>订单金额: 122.00元</Text>
                 </View>
-
-
             </View>);
     }
 
     render() {
         return (
-            <View>
+            <View style={{
+                flex: 1
+            }}>
                 <TitleBar isMainView={false}  title="系统通知" onLeftClick={() => { toastShort("left") } } onRightClick={() => { toastShort("right") } }/>
-                <View style={{ flex: 1 }}>
+                <View style={{flex: 1}}>
                     {this.renderContent(this.state.dataSource.cloneWithRows(
-                        this.state.storeLists === undefined ? [] : this.state.storeLists)) }
+                        this.state.storeLists === undefined ? [] : this.state.storeLists), this.state.hasSystemNotification) }
                 </View>
             </View>
 

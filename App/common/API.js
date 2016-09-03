@@ -32,3 +32,8 @@ export const bodyObj = (body) => {
         body:body
     }
 }
+
+export const RTN_CODE={
+    RTN_CODE_00:"00",
+    RTN_CODE_01:"01",
+}
