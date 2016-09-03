@@ -19,7 +19,7 @@ export default class SystemNotificationPage extends Component {
         this._renderSeparatorView = this._renderSeparatorView.bind(this);
 
         console.log("test1:", props.hasSystemNotification);
-        var datas = props.systemNotifications;
+        var datas = props.data;
         for (var i = 0; i < datas.length; i++) {
             datas[i].id = i;
         }
@@ -34,7 +34,7 @@ export default class SystemNotificationPage extends Component {
     //进行渲染数据
     renderContent(dataSource, hasSystemNotification) {
         if (!hasSystemNotification) {
-            return <View style={{flex:1, alignItems: 'center', justifyContent: 'center' }}>
+            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <TouchableOpacity style={{ flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ alignItems: 'center', justifyContent: 'center', color: '#1ba0ec', fontSize: 15 }}>
                         暂无缴费通知
@@ -152,7 +152,7 @@ export default class SystemNotificationPage extends Component {
                 flex: 1
             }}>
                 <TitleBar isMainView={false}  title="系统通知" onLeftClick={() => { toastShort("left") } } onRightClick={() => { toastShort("right") } }/>
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                     {this.renderContent(this.state.dataSource.cloneWithRows(
                         this.state.storeLists === undefined ? [] : this.state.storeLists), this.state.hasSystemNotification) }
                 </View>

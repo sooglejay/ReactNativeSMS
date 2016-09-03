@@ -19,38 +19,46 @@ const AvatarComponent = () =>
 
     </Image>
 
-const ContainerComponent = () =>
-    <ScrollView
+const ContainerComponent = ({data}) => {
+    let RXNF = data.RXNF + "年";
+    return <ScrollView
         style={ { flex: 1 } }
         showsVerticalScrollIndicator={ false }>
         <View style={ { flex: 1 } }>
             <AvatarComponent/>
             <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
-            <RowComponent titleKey="我的院系"  titleValue="建设与管理工程学院" />
-            <RowComponent titleKey="我的班级"  titleValue="工业工程15-2" />
-            <RowComponent titleKey="入学年度"  titleValue="2015年" />
-            <RowComponent titleKey="我的学号"  titleValue="201522190307" />
-            <RowComponent titleKey="我的院系"  titleValue="建设与管理工程学院" />
+            <RowComponent titleKey="我的院系"  titleValue={data.YX} />
+            <RowComponent titleKey="我的专业"  titleValue={data.ZY} />
+            <RowComponent titleKey="我的班级"  titleValue={data.BJ} />
+            <RowComponent titleKey="入学年度"  titleValue={RXNF}/>
+            <RowComponent titleKey="我的学号"  titleValue={data.XH} />
             <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
-            <RowComponent titleKey="我的民族"  titleValue="汉" />
-            <RowComponent titleKey="身份证号"  titleValue="XXXXXXX-2" />
-            <RowComponent titleKey="手机号码"  titleValue="XXXXXXXX" />
-            <RowComponent titleKey="家庭住址"  titleValue="XXXXXXXX" />
-            <RowComponent titleKey="电子邮箱"  titleValue="3940555@qq.com" />
+            <RowComponent titleKey="我的民族"  titleValue={data.MZ}/>
+            <RowComponent titleKey="身份证号"  titleValue={data.SFZ}/>
+            <RowComponent titleKey="手机号码"  titleValue={data.SJ} />
+            <RowComponent titleKey="家庭住址"  titleValue={data.ZZ} />
+            <RowComponent titleKey="电子邮箱"  titleValue={data.EMAIL} />
             <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
-            <RowComponent titleKey="开户银行"  titleValue="XXXXX" />
-            <RowComponent titleKey="银行卡号"  titleValue="XXXXXXX" />
+            <RowComponent titleKey="开户银行"  titleValue="服务器后台没有对应字段" />
+            <RowComponent titleKey="银行卡号"  titleValue={data.YHK}/>
             <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
 
         </View>
     </ScrollView>
+}
 
 export default class IndividualCenter extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: props.data,
+        }
+    }
     render() {
         return (
             <View>
                 <TitleBar isMainView={false}  title="个人中心" onLeftClick={() => { toastShort("you") } }/>
-                <ContainerComponent/>
+                <ContainerComponent data = {this.state.data}/>
             </View>
 
         );

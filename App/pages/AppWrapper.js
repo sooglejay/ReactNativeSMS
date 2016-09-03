@@ -19,7 +19,8 @@ export default class AppWrapper extends Component {
       selectedTab: 'Index',
 
       hasSystemNotification: false,
-      systemNotifications: [],
+      systemNotificationData: [],
+      individualCenterData: {},
     };
   }
 
@@ -36,11 +37,12 @@ export default class AppWrapper extends Component {
       // Error retrieving data
     } finally {
       //获取系统通知
-      this._getSystemNotificationFromApiAsync(XH);
+      await this._getSystemNotificationFromApiAsync(XH);
+      this._getIndividualCenterFromApiAsync(XH);
     }
   }
 
-  _getSystemNotificationFromApiAsync(xuehao) {
+  async _getSystemNotificationFromApiAsync(xuehao) {
     return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.systemNotification + '&XH=' + xuehao))
       .then((response) => {
         if (response.status == 200) {
@@ -53,6 +55,8 @@ export default class AppWrapper extends Component {
         }
       })
       .then((responseJson) => {
+        console.log(" 系统通知 网络请求h:121:" + JSON.stringify(responseJson));
+
         if (responseJson.RTN_CODE == RTN_CODE.RTN_CODE_01) {
           // console.log("rigou ----hhhhhhh:121:" + JSON.stringify(responseJson));
           // console.log("rigou ---qwq:" + responseJson.RTN_CODE);
@@ -60,22 +64,48 @@ export default class AppWrapper extends Component {
           this.setState(() => {
             return Object.assign({}, this.state, {
               hasSystemNotification: false,
-              systemNotifications: responseJson.DETAIL,
+              systemNotificationData: responseJson.DETAIL,
             });
           });
         } else {
           this.setState(() => {
             return Object.assign({}, this.state, {
               hasSystemNotification: true,
-              systemNotifications: responseJson.DETAIL,
+              systemNotificationData: responseJson.DETAIL,
             });
           });
+
         }
       })
       .catch((error) => {
         console.error(error);
       });
   }
+  async _getIndividualCenterFromApiAsync(xuehao) {
+    return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.individualCenter + '&XH=' + xuehao))
+      .then((response) => {
+        if (response.status == 200) {
+          // return {"BJ":"机电13(3)-1","EMAIL":"","MZ":"","RXNF":"2015","SFZ":"510602199408067003","SJ":"","XH":"3320130193126","XM":"邹明珂","YHK":"","YX":"机械工程学院","ZY":"机械工程与自动化学院","ZZ":""}}; 
+          return response.json();
+        }
+        else {
+          toastShort('系统错误！');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+      .then((responseJson) => {
+        console.log(" 个人忠心 网络请求h:121:" + JSON.stringify(responseJson));
+        this.setState(() => {
+          return Object.assign({}, this.state, {
+            individualCenterData: responseJson,
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
 
   componentDidMount() {
     this.foo();
@@ -83,6 +113,12 @@ export default class AppWrapper extends Component {
 
 
   render() {
+    if (this.state.individualCenterData) {
+      console.log('have indi');
+    } else {
+      console.log('没有个人真心的值 indi');
+
+    }
     return (
       <TabNavigator>
         <TabNavigator.Item
@@ -128,7 +164,7 @@ export default class AppWrapper extends Component {
           onPress={ () => this.setState({
             selectedTab: 'SystemNotification'
           }) }>
-          <SystemNotification {...this.props} systemNotifications={this.state.systemNotifications} hasSystemNotification={this.state.hasSystemNotification}/>
+          <SystemNotification {...this.props} data={this.state.systemNotificationData} hasSystemNotification={this.state.hasSystemNotification}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           title="个人中心"
@@ -144,7 +180,7 @@ export default class AppWrapper extends Component {
           onPress={ () => this.setState({
             selectedTab: 'IndividualCenter'
           }) }>
-          <IndividualCenter {...this.props}/>
+          <IndividualCenter {...this.props} data={this.state.individualCenterData}/>
         </TabNavigator.Item>
       </TabNavigator>
     );
