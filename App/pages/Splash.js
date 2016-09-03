@@ -12,7 +12,7 @@ import {
 
 import Login from './Login';
 import AppMain from './AppWrapper';
-import {isLogined} from'../common/Storage';
+import {isLogined, value_isLogined} from'../common/Storage';
 var {height, width} = Dimensions.get('window');
 
 class Splash extends React.Component {
@@ -20,28 +20,30 @@ class Splash extends React.Component {
     super(props);
   }
   async foo() {
+    let isLogined = '';
     try {
-      const value = await AsyncStorage.getItem(isLogined);
-      console.log("取值成功");
-      if (value !== null) {
+      isLogined = await AsyncStorage.getItem(isLogined);
+      if (isLogined !== null) {
+        console.log("取登录的值不为null:" + isLogined);
         // We have data!!
-        console.log("here:" + value);
       }
     } catch (error) {
       // Error retrieving data
+    } finally {
+      console.log("用户是否登录:" + isLogined);
+      const {navigator} = this.props;
+      this.timer = setTimeout(() => {
+        InteractionManager.runAfterInteractions(() => {
+          navigator.resetTo({
+            component: isLogined === value_isLogined ? AppMain : Login,
+            title: 'Login'
+          });
+        });
+      }, 1);
     }
   }
   componentDidMount() {
-    var isLogined = this.foo();
-    const {navigator} = this.props;
-    this.timer = setTimeout(() => {
-      InteractionManager.runAfterInteractions(() => {
-        navigator.resetTo({
-          component: !isLogined ? Login : AppMain,
-          title: 'Login'
-        });
-      });
-    }, 1);
+    this.foo();
   }
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer);

@@ -20,26 +20,29 @@ var verifycode = '';
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: {}
-    }
     this.btnLoginClick = this.btnLoginClick.bind(this);
     this.loginRequestFromApiAsync = this.loginRequestFromApiAsync.bind(this);
   }
   componentDidMount() {
     // loginRequestFromApiAsync();
   }
-  async foo() {
+  async foo(responseJson) {
+    toastShort(responseJson.RTN_MESSAGE);
     try {
-      await AsyncStorage.setItem(isLogined, "yes");
-      console.log("设置成功！");
+      await AsyncStorage.setItem(isLogined, "Logined");
     } catch (error) {
       // Error saving data
+    } finally {
+      const {navigator} = this.props;
+      InteractionManager.runAfterInteractions(() => {
+        navigator.resetTo({
+          component: AppWrapper,
+          title: '首页'
+        });
+      });
     }
   }
   loginRequestFromApiAsync() {
-    console.log('HandShakeCode.login' + HandShakeCode.login, "username=", username, " password=", password, "  verifycode=", verifycode);
-
     return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.login + '&XH=' + username + '&MM=' + password))
       .then((response) => {
         if (response.status == 200) {
@@ -51,11 +54,7 @@ class Login extends Component {
         }
       })
       .then((responseJson) => {
-        toastShort(responseJson.RTN_MESSAGE);
-        this.foo();
-        this.setState({
-          text: responseJson
-        });
+        this.foo(responseJson);
       })
       .catch((error) => {
         console.error(error);
@@ -64,14 +63,6 @@ class Login extends Component {
   btnLoginClick() {
     toastShort("正在登录... ");
     this.loginRequestFromApiAsync();
-
-    // const {navigator} = this.props;
-    // InteractionManager.runAfterInteractions(() => {
-    //   navigator.resetTo({
-    //     component: AppWrapper,
-    //     title: '首页'
-    //   });
-    // });
   }
   render() {
     return (
