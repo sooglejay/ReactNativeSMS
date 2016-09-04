@@ -39,7 +39,7 @@ class Splash extends React.Component {
             title: 'Login'
           });
         });
-      }, 1);
+      }, 2500);
     }
   }
   componentDidMount() {

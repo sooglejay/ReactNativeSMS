@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   viewWapperStyle: { justifyContent: 'center', flexDirection: 'column', flex: 1, margin: 8, borderWidth: 1, borderColor: '#d9d9d9' },
   viewRowStyle: { flexDirection: 'row', height: 100 },
   touchableOpacityStyle: { flex: 1, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
-  imageStyle: { width: 40, height: 40, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
-  textStyle: { fontSize: 15, alignSelf: 'center', marginTop: 4, alignItems: 'center', justifyContent: 'center' },
+  imageStyle: { width: 56, height: 56, alignSelf: 'center', alignItems: 'center', justifyContent: 'center' },
+  textStyle: { fontSize: 15, alignSelf: 'center', marginTop: 12, alignItems: 'center', justifyContent: 'center' },
   imagePlus: { width: 60, height: 60, justifyContent: 'center', alignItems: 'center' },
   topbar_bg: {
     height: 48,
@@ -146,7 +146,7 @@ export default class Index extends Component {
                 <TouchableOpacity onPress={() => this.handleNavigator(0) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_content.png') }
                       style={ styles.imageStyle} />
                     <Text style={styles.textStyle}>
                       缴费汇总表
@@ -157,7 +157,7 @@ export default class Index extends Component {
                 <TouchableOpacity onPress={() => this.handleNavigator(1) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_paymentDetail.png') }
                       style={ styles.imageStyle} />
                     <Text style={styles.textStyle}>
                       缴费明细表
@@ -168,10 +168,10 @@ export default class Index extends Component {
                 <TouchableOpacity onPress={() => this.handleNavigator(2) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_statistics.png') }
                       style={ styles.imageStyle} />
                     <Text style={styles.textStyle}>
-                      应缴费统计表
+                      应收缴费统计表
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -181,7 +181,7 @@ export default class Index extends Component {
                 <TouchableOpacity  onPress={() => this.handleNavigator(3) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_receivablePayment.png') }
                       style={ styles.imageStyle} />
                     <Text style={styles.textStyle}>
                       应收款缴费
@@ -192,7 +192,7 @@ export default class Index extends Component {
                 <TouchableOpacity onPress={() => this.handleNavigator(4) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_other_payment.png') }
                       style={ styles.imageStyle} />
                     <Text style={styles.textStyle}>
                       其他缴费
@@ -203,7 +203,7 @@ export default class Index extends Component {
                 <TouchableOpacity  onPress={() => this.handleNavigator(5) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_un_payed.png') }
                       style={ styles.imageStyle} />
                     <Text style={styles.textStyle}>
                       未完成订单
@@ -216,7 +216,7 @@ export default class Index extends Component {
                 <TouchableOpacity  onPress={() => this.handleNavigator(6) } style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
-                      source={ require('../imgs/icon_university.png') }
+                      source={ require('../imgs/index/icon_payed.png') }
                       style={styles.imageStyle} />
                     <Text style={styles.textStyle}>
                       已完成订单
