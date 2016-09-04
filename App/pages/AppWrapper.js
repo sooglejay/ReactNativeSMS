@@ -40,9 +40,9 @@ export default class AppWrapper extends Component {
       // Error retrieving data
     } finally {
       //获取系统通知
-      await this._getSystemNotificationFromApiAsync(XH);
-      await this._getIndividualCenterFromApiAsync(XH);
-      await this._getReceivablePaymentFromApiAsync(XH);
+      // await this._getSystemNotificationFromApiAsync(XH);
+      // await this._getIndividualCenterFromApiAsync(XH);
+      // await this._getReceivablePaymentFromApiAsync(XH);
       this._getOtherPaymentFromApiAsync(XH);
     }
   }
@@ -182,7 +182,7 @@ export default class AppWrapper extends Component {
           onPress={ () => this.setState({
             selectedTab: 'Index'
           }) }>
-          <Index {...this.props} paymentSummaryReceivableData={this.state.paymentSummaryReceivableData} paymentSummaryOtherData={this.state.paymentSummaryOtherData}/>
+          <Index {...this.props} {...this.state}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           title="系统通知"

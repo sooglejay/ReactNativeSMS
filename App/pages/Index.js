@@ -66,6 +66,8 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     console.log("的首页的props,:",props);
+    console.log("的首页的props,paymentSummaryReceivableData:",props.paymentSummaryReceivableData);
+    
     this.state = {
       paymentSummaryOtherData: props.paymentSummaryOtherData,
       paymentSummaryReceivableData: props.paymentSummaryReceivableData,

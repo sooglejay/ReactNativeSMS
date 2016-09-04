@@ -7,88 +7,31 @@ import TitleBar from '../components/TitleBar';
 import ToggleBar from '../components/ToggleBar';
 import {toastShort} from '../utils/ToastUtil';
 import * as AppTheme from '../theme';
-
-const LeftData = {
-    "api": "GetStoreList",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "kind": "应收款",
-        "money": '122.02',
-    }, {
-            "id": 2,
-            "kind": "已收金额",
-            "money": '0.02',
-        }, {
-            "id": 3,
-            "kind": "减免金额",
-            "money": '0.00',
-        }, {
-            "id": 4,
-            "kind": "退费金额",
-            "money": '0.00',
-        }, {
-            "id": 5,
-            "kind": "欠费金额",
-            "money": '122.00',
-        }
-    ]
-};
+import {API_SERVER, HandShakeCode, bodyObj, RTN_CODE} from '../common/API.js';
+import {key_XH} from'../common/Storage';
 
 
-const RightData = {
-    "api": "GetStoreList",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "kind": "TEST",
-        "money": '0.04',
-    }, {
-            "id": 2,
-            "kind": "TEST2",
-            "money": '0.02',
-        }, {
-            "id": 3,
-            "kind": "TEST3",
-            "money": '0.00',
-        }, {
-            "id": 4,
-            "kind": "TEST4",
-            "money": '0.00',
-        }, {
-            "id": 5,
-            "kind": "合计",
-            "money": '122.00',
-        }
-    ]
-};
-
-let rows = [...LeftData.data];
+var data=[];
 let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { r1 !== r2 } });
-
-
 class PaymentSummary extends Component {
     constructor(props) {
         super(props)
         this.state = {
             selectedLeft: true,
-            dataSource: ds.cloneWithRows([]),
-            rows: rows
+            dataSource: ds.cloneWithRows(data),
+            paymentSummaryReceivableData:[],
+            paymentSummaryOtherData:[],
         }
         this._renderRow = this._renderRow.bind(this);
         this._renderHeader = this._renderHeader.bind(this);
         this._onItemClick = this._onItemClick.bind(this);
         this._back = this._back.bind(this);
+        this._updateListViewDataSource=this._updateListViewDataSource.bind(this);
     }
     componentDidMount() {
-        this.setState({
-            dataSource: ds.cloneWithRows(this.state.rows)
-        })
+        this.foo();
     }
+
     _back() {
         const {navigator} = this.props;
         InteractionManager.runAfterInteractions(() => {
@@ -96,27 +39,130 @@ class PaymentSummary extends Component {
         });
     }
 
+    async foo() {
+    var XH = '';
+    try {
+      XH = await AsyncStorage.getItem(key_XH);
+      if (XH !== null) {
+        console.log("取学号的值不为null:" + XH);
+        // We have data!!
+      }
+    } catch (error) {
+      // Error retrieving data
+    } finally {
+      await this._getOtherPaymentFromApiAsync(XH);
+      this._getReceivablePaymentFromApiAsync(XH);
+
+    }
+  }
+
+  async _getReceivablePaymentFromApiAsync(xuehao) {
+    return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.paymentTableRequire + '&XH=' + xuehao))
+      .then((response) => {
+        if (response.status == 200) {
+          // return {"BJ":"机电13(3)-1","EMAIL":"","MZ":"","RXNF":"2015","SFZ":"510602199408067003","SJ":"","XH":"3320130193126","XM":"邹明珂","YHK":"","YX":"机械工程学院","ZY":"机械工程与自动化学院","ZZ":""}}; 
+          return response.json();
+        }
+        else {
+          toastShort('系统错误！');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+      .then((responseJson) => {
+        console.log(" _getReceivablePaymentFromApiAsync:" + JSON.stringify(responseJson));
+    
+         data.splice(0, data.length)
+         var index=0;
+         for(var i in responseJson){
+             var obj = {};
+             var kind = "";
+                if(i=="YSK"){
+                    kind="应收款";
+                }else if(i=="YSJE"){
+                   kind="已收金额";
+                }else if(i=="JMJE"){
+                   kind="减免金额";
+                }else if(i=="TFJE"){
+                    kind="退费金额";
+                }else if(i=="QFJE"){
+                    kind="欠费金额";
+            }
+            obj.kind=kind;
+            obj.id= index;
+            obj.money = responseJson[i];
+            data[index++]=obj;
+         }
+        console.log("ceshi 11:",JSON.stringify(data));
+        this.setState(() => {
+          return Object.assign({}, this.state, {
+            dataSource: ds.cloneWithRows(this.state.rows),
+            paymentSummaryReceivableData:[...data],
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  async _getOtherPaymentFromApiAsync(xuehao) {
+    return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.paymentTableOthers + '&XH=' + xuehao))
+      .then((response) => {
+        if (response.status == 200) {
+          // return {"BJ":"机电13(3)-1","EMAIL":"","MZ":"","RXNF":"2015","SFZ":"510602199408067003","SJ":"","XH":"3320130193126","XM":"邹明珂","YHK":"","YX":"机械工程学院","ZY":"机械工程与自动化学院","ZZ":""}}; 
+          return response.json();
+        }
+        else {
+          toastShort('系统错误！');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+      .then((responseJson) => {
+        console.log(" _getOtherPaymentFromApiAsync :" + JSON.stringify(responseJson));
+
+        data.splice(0, data.length)
+        for (var index = 0; index < responseJson.length; index++) {
+            var element = responseJson[index];
+            var obj = {};
+            obj.kind = element.XM;
+            obj.money = element.JE;
+            obj.id = index;
+            data[index]=obj;
+        }
+        console.log("ceshi 2:",JSON.stringify(data));
+         this.setState(() => {
+          return Object.assign({}, this.state, {
+           paymentSummaryOtherData:[...data],
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
     //here left means "应收款缴费汇总表"
     _updateListViewDataSource(isLeft) {
-        if (isLeft) {
-            toastShort("left");
-            this.state.rows.splice(0, this.state.rows.length);
-            this.state.rows = [...LeftData.data];
-        } else {
-            toastShort("right");
-            this.state.rows.splice(0, this.state.rows.length);
-            this.state.rows = [...RightData.data];
-        }
-        this.setState({
-            dataSource: ds.cloneWithRows(this.state.rows),
+        toastShort('dddas');
+        console.log(" isRight:" + JSON.stringify(this.state.paymentSummaryOtherData));
+        console.log(" isLeft:" + JSON.stringify(this.state.paymentSummaryReceivableData));
+         data.splice(0, data.length)
+        if(isLeft){
+            data  = [...this.state.paymentSummaryReceivableData];
+        }else{
+            data = [...this.state.paymentSummaryOtherData];
+        }      
+        this.setState(() => {
+          return Object.assign({}, this.state, {
+            dataSource: ds.cloneWithRows(data),
             selectedLeft: isLeft
+          });
         });
     }
 
     _onItemClick(rowData, rowID) {
-        this.state.rows.splice(rowID, 1);
+        data.splice(rowID, 1);
         this.setState({
-            dataSource: ds.cloneWithRows(this.state.rows),
+            dataSource: ds.cloneWithRows(data),
         });
     }
     _renderHeader() {
