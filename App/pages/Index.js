@@ -4,6 +4,8 @@ import { View, StatusBar, Text, Platform, Dimensions, Image, StyleSheet, Touchab
 import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import TitleBar from '../components/TitleBar';
+import * as AppTheme from '../theme';
+
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
 import {toastShort} from '../utils/ToastUtil';
 import PaymentSummary from './PaymentSummary';
@@ -153,7 +155,8 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <ShortColumn/>
+                <View style={{  backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
+
                 <TouchableOpacity onPress={() => this.handleNavigator(1) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
@@ -164,7 +167,8 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <ShortColumn/>
+                <View style={{  backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
+
                 <TouchableOpacity onPress={() => this.handleNavigator(2) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
@@ -176,7 +180,10 @@ export default class Index extends Component {
                   </View>
                 </TouchableOpacity>
               </View>
-              <ShortLine/>
+
+              <View style={{ flex: 1, backgroundColor: AppTheme.SeparatorColor, height: 1 }}/>
+
+
               <View style={ styles.viewRowStyle }>
                 <TouchableOpacity  onPress={() => this.handleNavigator(3) } style={ styles.touchableOpacityStyle }>
                   <View>
@@ -188,7 +195,7 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <ShortColumn/>
+                <View style={{ backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
                 <TouchableOpacity onPress={() => this.handleNavigator(4) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
@@ -199,7 +206,7 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <ShortColumn/>
+                <View style={{ backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
                 <TouchableOpacity  onPress={() => this.handleNavigator(5) } style={ styles.touchableOpacityStyle }>
                   <View>
                     <Image
@@ -211,7 +218,9 @@ export default class Index extends Component {
                   </View>
                 </TouchableOpacity>
               </View>
-              <ShortLine/>
+
+              <View style={{ flex: 1, backgroundColor: AppTheme.SeparatorColor, height: 1 }}/>
+
               <View style={ styles.viewRowStyle}>
                 <TouchableOpacity  onPress={() => this.handleNavigator(6) } style={styles.touchableOpacityStyle }>
                   <View>
@@ -223,7 +232,7 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <ShortColumn/>
+                <View style={{backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
                 <TouchableOpacity style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
@@ -231,7 +240,7 @@ export default class Index extends Component {
                       style={styles.imagePlus } />
                   </View>
                 </TouchableOpacity>
-                <ShortColumn/>
+                <View style={{backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
                 <View style={ styles.touchableOpacityStyle }>
                 </View>
               </View>

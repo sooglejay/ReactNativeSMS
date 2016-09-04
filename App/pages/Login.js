@@ -1,7 +1,6 @@
 'use strict';
 import React, { Component, PropTypes } from "react";
 import { View, AsyncStorage, Text, ScrollView, BackAndroid, TouchableOpacity, Image, StyleSheet, InteractionManager, TextInput, Platform, ToastAndroid, NativeModules } from "react-native";
-import TextField from 'react-native-md-textinput';
 import ShortLineTwo from '../components/ShortLineTwo';
 import { toastShort } from '../utils/ToastUtil';
 import {API_SERVER, HandShakeCode, bodyObj} from '../common/API.js';
