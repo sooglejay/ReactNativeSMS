@@ -8,7 +8,6 @@ import TabNavigator from 'react-native-tab-navigator';
 import Index from './Index';
 import SystemNotification from './SystemNotification';
 import IndividualCenter from './IndividualCenter';
-import Badge from 'react-native-smart-badge'
 import {API_SERVER, HandShakeCode, bodyObj, RTN_CODE} from '../common/API.js';
 import {key_XH} from'../common/Storage';
 
