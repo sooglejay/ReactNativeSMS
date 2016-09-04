@@ -17,8 +17,6 @@ export default class SystemNotificationPage extends Component {
         this._renderFooter = this._renderFooter.bind(this);
         this._renderHeader = this._renderHeader.bind(this);
         this._renderSeparatorView = this._renderSeparatorView.bind(this);
-
-        console.log("test1:", props.hasSystemNotification);
         var datas = props.data;
         for (var i = 0; i < datas.length; i++) {
             datas[i].id = i;

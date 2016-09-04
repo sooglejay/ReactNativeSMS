@@ -14,9 +14,7 @@ const RowComponent = (props) =>
 const AvatarComponent = () =>
     <Image source={require('../imgs/icon_university.png') } style={{ height: 190, flex: 1, justifyContent: 'center' }} >
         <Image source={require('../imgs/icon_university.png') } style={{ height: 90, width: 90, alignSelf: 'center' }} />
-
         <Text style={{ backgroundColor: 'transparent', margin: 6, color: 'black', fontSize: 22, alignSelf: 'center' }} >刘连雨</Text>
-
     </Image>
 
 const ContainerComponent = ({data}) => {
@@ -42,7 +40,6 @@ const ContainerComponent = ({data}) => {
             <RowComponent titleKey="开户银行"  titleValue="服务器后台没有对应字段" />
             <RowComponent titleKey="银行卡号"  titleValue={data.YHK}/>
             <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
-
         </View>
     </ScrollView>
 }

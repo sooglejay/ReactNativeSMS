@@ -12,6 +12,7 @@
     "react-native": "0.32.0",
     "react-native-icon-badge": "^1.1.1",
     "react-native-linear-gradient": "^1.5.12",
+    "react-native-loading-spinner-overlay": "^0.3.0",
     "react-native-md-textinput": "^2.0.4",
     "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.5.4",

@@ -21,6 +21,9 @@ export default class AppWrapper extends Component {
       hasSystemNotification: false,
       systemNotificationData: [],
       individualCenterData: {},
+      paymentSummaryReceivableData: {},
+      paymentSummaryOtherData: {},
+
     };
   }
 
@@ -38,7 +41,9 @@ export default class AppWrapper extends Component {
     } finally {
       //获取系统通知
       await this._getSystemNotificationFromApiAsync(XH);
-      this._getIndividualCenterFromApiAsync(XH);
+      await this._getIndividualCenterFromApiAsync(XH);
+      await this._getReceivablePaymentFromApiAsync(XH);
+      this._getOtherPaymentFromApiAsync(XH);
     }
   }
 
@@ -105,6 +110,54 @@ export default class AppWrapper extends Component {
         console.error(error);
       });
   }
+  async _getReceivablePaymentFromApiAsync(xuehao) {
+    return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.paymentTableRequire + '&XH=' + xuehao))
+      .then((response) => {
+        if (response.status == 200) {
+          // return {"BJ":"机电13(3)-1","EMAIL":"","MZ":"","RXNF":"2015","SFZ":"510602199408067003","SJ":"","XH":"3320130193126","XM":"邹明珂","YHK":"","YX":"机械工程学院","ZY":"机械工程与自动化学院","ZZ":""}}; 
+          return response.json();
+        }
+        else {
+          toastShort('系统错误！');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+      .then((responseJson) => {
+        console.log(" 应该手的 网络请求h:121:" + JSON.stringify(responseJson));
+        this.setState(() => {
+          return Object.assign({}, this.state, {
+            paymentSummaryReceivableData: responseJson,
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  async _getOtherPaymentFromApiAsync(xuehao) {
+    return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.paymentTableOthers + '&XH=' + xuehao))
+      .then((response) => {
+        if (response.status == 200) {
+          // return {"BJ":"机电13(3)-1","EMAIL":"","MZ":"","RXNF":"2015","SFZ":"510602199408067003","SJ":"","XH":"3320130193126","XM":"邹明珂","YHK":"","YX":"机械工程学院","ZY":"机械工程与自动化学院","ZZ":""}}; 
+          return response.json();
+        }
+        else {
+          toastShort('系统错误！');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+      .then((responseJson) => {
+        console.log(" paymentTableOthers 网络请求h:121:" + JSON.stringify(responseJson));
+        this.setState(() => {
+          return Object.assign({}, this.state, {
+            paymentSummaryOtherData: responseJson,
+          });
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
 
   componentDidMount() {
@@ -113,12 +166,6 @@ export default class AppWrapper extends Component {
 
 
   render() {
-    if (this.state.individualCenterData) {
-      console.log('have indi');
-    } else {
-      console.log('没有个人真心的值 indi');
-
-    }
     return (
       <TabNavigator>
         <TabNavigator.Item
@@ -135,7 +182,7 @@ export default class AppWrapper extends Component {
           onPress={ () => this.setState({
             selectedTab: 'Index'
           }) }>
-          <Index {...this.props}/>
+          <Index {...this.props} paymentSummaryReceivableData={this.state.paymentSummaryReceivableData} paymentSummaryOtherData={this.state.paymentSummaryOtherData}/>
         </TabNavigator.Item>
         <TabNavigator.Item
           title="系统通知"
