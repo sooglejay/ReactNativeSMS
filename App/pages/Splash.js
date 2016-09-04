@@ -51,10 +51,10 @@ class Splash extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, justifyContent: 'center',backgroundColor:'#1ba0ec' }}>
         <Image
-          style={{ flex: 1, width: width, height: height }}
-          source={require('../imgs/icon_1.jpg') }
+          style={{alignSelf:'center', width: width / 3, height: width / 3 }}
+          source={require('../imgs/icon_university.png') }
           />
       </View>
     );

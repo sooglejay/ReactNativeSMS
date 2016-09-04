@@ -14,10 +14,10 @@ import FinishedOrderList from './FinishedOrderList';
 
 
 const BANNER_IMGS = [
-  require('../imgs/icon_university.png'),
-  require('../imgs/icon_university.png'),
-  require('../imgs/icon_university.png'),
-  require('../imgs/icon_university.png')
+  require('../imgs/icon_bar.png'),
+  require('../imgs/icon_bar.png'),
+  require('../imgs/icon_bar.png'),
+  require('../imgs/icon_bar.png')
 ];
 
 const styles = StyleSheet.create({
