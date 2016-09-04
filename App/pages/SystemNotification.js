@@ -18,9 +18,10 @@ export default class SystemNotificationPage extends Component {
         this._renderHeader = this._renderHeader.bind(this);
         this._renderSeparatorView = this._renderSeparatorView.bind(this);
         var datas = props.data;
-        for (var i = 0; i < datas.length; i++) {
-            datas[i].id = i;
-        }
+        if (datas)
+            for (var i = 0; i < datas.length; i++) {
+                datas[i].id = i;
+            }
         this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
