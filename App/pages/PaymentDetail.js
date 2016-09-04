@@ -4,73 +4,8 @@ import {  InteractionManager, AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import * as AppTheme from '../theme';
-
-const PaymentDetailData = {
-    "api": "GetStoreList",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "kind": "学费",
-        "serialNumber": "003975",
-        "money": '0.04',
-        sectionID: "2016年",
-        "method": "网上支付",
-        "date": "2016-05-28",
-    }, {
-            "id": 2,
-            "kind": "住宿费",
-            "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            sectionID: "2016年",
-            "date": "2016-05-29",
-        }, {
-            "id": 3,
-            "kind": "恋爱经费",
-            "serialNumber": "003975",
-            "money": '0.04',
-            sectionID: "2017年",
-            "method": "网上支付",
-            "date": "2016-05-30",
-        }, {
-            "id": 4,
-            "kind": "房费",
-            "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2016-05-31",
-            sectionID: "2017年",
-        }, {
-            "id": 5,
-            "kind": "礼物费",
-            "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2016-06-1",
-            sectionID: "2017年",
-        }, {
-            "id": 6,
-            "kind": "学杂费",
-            "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2018-06-1",
-            sectionID: "2018年",
-        },
-        {
-            "id": 7,
-            "kind": "把妹飞",
-            "serialNumber": "003975",
-            "money": '0.04',
-            "method": "网上支付",
-            "date": "2018-06-2",
-            sectionID: "2018年",
-        }
-    ]
-};
-
+import {API_SERVER, HandShakeCode, bodyObj, RTN_CODE} from '../common/API.js';
+import {key_XH} from'../common/Storage';
 
 class PaymentDetail extends Component {
     _getInitialState() {
@@ -82,6 +17,7 @@ class PaymentDetail extends Component {
             return dataBlob[sectionID + ':' + rowID];
         };
         return {
+            hasDatas:false,
             dataSource: new ListView.DataSource({
                 getRowData: getRowData,
                 getSectionHeaderData: getSectionData,
@@ -91,60 +27,73 @@ class PaymentDetail extends Component {
         }
     }
 
-    componentWillMount() {
-        var res = this.listViewHandleData(PaymentDetailData.data);
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(res.dataBlob, res.sectionIDs, res.rowIDs),
-            loaded: true
-        });
-    }
-    /**
-          * 数据处理
-          */
-    listViewHandleData(result) {
-        var me = this,
-            dataBlob = {},
-            sectionIDs = [],
-            rowIDs = [],
-            key,
-            //result = Util.sortResource(data),        //重新排序
-            length = result.length,
-            splitIdx;
-
-        var sCount = -1;
-        //将数据分隔成两段
-        for (var i = 0; i < length; i++) {
-            var item = result[i]
-            var sectionID = item.sectionID;
-
-            if (sectionIDs.indexOf(sectionID) != -1) {
-                dataBlob[sectionID + ":" + i] = item;
-                rowIDs[sCount].push(i);
-            } else {
-                //first i=0
-                sCount++;
-                var arr = [];
-                arr.push(i);
-                sectionIDs.push(sectionID);
-                rowIDs.push(arr);
-                //the right of the equal is the SectionData
-                dataBlob[sectionID] = sectionID
-                dataBlob[sectionID + ":" + i] = item;
+    async foo() {
+        var XH = '';
+        try {
+            XH = await AsyncStorage.getItem(key_XH);
+            if (XH !== null) {
+                // We have data!!
             }
+        } catch (error) {
+            // Error retrieving data
+        } finally {
+            await this._getPaymentDetailFromApiAsync(XH);
         }
+    }
 
-        return {
-            dataBlob: dataBlob,
-            sectionIDs: sectionIDs,
-            rowIDs: rowIDs
-        }
+    async _getPaymentDetailFromApiAsync(xuehao) {
+        return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.paymentDetail + '&XH=' + xuehao))
+            .then((response) => {
+                if (response.status == 200) {
+                    return {
+                        "DETAIL": {},
+
+                        "RTN_CODE": "00", "RTN_MSG": "有其缴费项"
+                    };
+
+                    // return response.json();
+                }
+                else {
+                    toastShort('系统错误！');
+                    throw new Error('Something went wrong on api server!');
+                }
+            })
+            .then((responseJson) => {
+                var datas = {},
+                    sectionIDs = [],
+                    rowIDs = [];
+                var sCount = 0;
+                var sourceDatas = responseJson.DETAIL;
+                for (var i in sourceDatas) {
+                    sectionIDs.push(i);
+                    var arr = [];
+                    rowIDs.push(arr);
+                    datas[i] = i;
+                    for (var j = 0; j < sourceDatas[i].length; j++) {
+                        datas[i + ":" + j] = sourceDatas[i][j];
+                        rowIDs[sCount].push(j);
+                    }
+                    sCount++;
+
+                }
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRowsAndSections(datas, sectionIDs, rowIDs),
+                    loaded: true,
+                    hasDatas:sCount>0
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+    componentWillMount() {
+        this.foo();
     }
 
     constructor(props) {
         super(props);
         this._renderRow = this._renderRow.bind(this);
         this._back = this._back.bind(this);
-
         this.state = this._getInitialState();
     }
     _back() {
@@ -168,11 +117,11 @@ class PaymentDetail extends Component {
                         flex: 1,
                         backgroundColor: 'white',
                     }}>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据编号: {rowData.serialNumber}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据金额(元): {rowData.money}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>结算方式: {rowData.method}</Text>
-                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据日期: {rowData.date}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 15 }}>{rowData.TYPE}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据编号: {rowData.PJDH}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据金额(元): {rowData.JE}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>结算方式: {rowData.JSFS}</Text>
+                        <Text style={{ margin: 10, color: '#323232', fontSize: 11 }}>单据日期: {rowData.JSRQ}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -186,21 +135,35 @@ class PaymentDetail extends Component {
         )
     }
 
-
+    renderContent() {
+        if (this.state.hasDatas == true) {
+            return <ListView
+                initialListSize={1}
+                enableEmptySections={true}
+                dataSource={this.state.dataSource}
+                renderRow={this._renderRow}
+                style={{ backgroundColor: 'white', flex: 1 }}
+                enableEmptySections={true}
+                renderSectionHeader={this._renderSectionHeader}
+                renderSeparator={this._renderSeparatorView}
+                />
+        } else {
+            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity style={{ flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ alignItems: 'center', justifyContent: 'center', color: '#1ba0ec', fontSize: 15 }}>
+                        暂无缴费记录
+                    </Text>
+                </TouchableOpacity>
+            </View>;
+        }
+    }
     render() {
-        return (<View>
+        return (<View style={{
+                flex: 1
+            }}>
             <TitleBar onLeftClick={this._back} title="缴费明细表"/>
             <View style={{ flex: 1 }}>
-                <ListView
-                    initialListSize={1}
-                    enableEmptySections={true}
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderRow}
-                    style={{ backgroundColor: 'white', flex: 1 }}
-                    enableEmptySections={true}
-                    renderSectionHeader={this._renderSectionHeader}
-                    renderSeparator={this._renderSeparatorView}
-                    />
+                {this.renderContent() }
             </View>
         </View>);
     }
