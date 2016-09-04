@@ -51,7 +51,7 @@ class PaymentSummary extends Component {
       // Error retrieving data
     } finally {
       await this._getOtherPaymentFromApiAsync(XH);
-      this._getReceivablePaymentFromApiAsync(XH);
+      await this._getReceivablePaymentFromApiAsync(XH);
 
     }
   }
