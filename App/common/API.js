@@ -19,7 +19,7 @@ export const HandShakeCode = {
     paymentTableOthers: '0005',
     paymentDetail: '0006',
     paymentTableRequireCollection: '0007',
-    orderCompleted: '0008',
+    orderCompleted: '0010',
 }
 
 export const bodyObj = (body) => {

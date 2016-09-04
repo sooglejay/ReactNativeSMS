@@ -1,89 +1,11 @@
 'use strict';
 import React, { Component } from 'react';
-import {  InteractionManager,   AppRegistry,
+import {  InteractionManager, AppRegistry,
     View, StatusBar, Text, ListView, Platform, Image, StyleSheet, TouchableOpacity, } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import * as AppTheme from '../theme';
-
-const ReceivablePaymentStatisticsData = {
-    "api": "GetStoreList",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "kind": "学费",
-        "serialNumber": "003975",
-        "moneyShouldPay": '0.04',
-        "moneyPayed": '0.01',
-        'moneyMinus': '0.01',
-        'moneyBack': '0.01',
-        'moneyArrears': '0.01',
-        sectionID: "2016年",
-    }, {
-            "id": 2,
-            "kind": "住宿费",
-            "serialNumber": "003975",
-            "moneyShouldPay": '0.04',
-            "moneyPayed": '0.01',
-            'moneyMinus': '0.01',
-            'moneyBack': '0.01',
-            'moneyArrears': '0.01',
-            sectionID: "2016年",
-        }, {
-            "id": 3,
-            "kind": "恋爱经费",
-            "serialNumber": "003975",
-            "moneyShouldPay": '0.04',
-            "moneyPayed": '0.01',
-            'moneyMinus': '0.01',
-            'moneyBack': '0.01',
-            'moneyArrears': '0.01',
-            sectionID: "2017年",
-        }, {
-            "id": 4,
-            "kind": "房费",
-            "serialNumber": "003975",
-            "moneyShouldPay": '0.04',
-            "moneyPayed": '0.01',
-            'moneyMinus': '0.01',
-            'moneyBack': '0.01',
-            'moneyArrears': '0.01',
-            sectionID: "2017年",
-        }, {
-            "id": 5,
-            "kind": "礼物费",
-            "serialNumber": "003975",
-            "moneyShouldPay": '0.04',
-            "moneyPayed": '0.01',
-            'moneyMinus': '0.01',
-            'moneyBack': '0.01',
-            'moneyArrears': '0.01',
-            sectionID: "2017年",
-        }, {
-            "id": 6,
-            "kind": "学杂费",
-            "serialNumber": "003975",
-            "moneyShouldPay": '0.04',
-            "moneyPayed": '0.01',
-            'moneyMinus': '0.01',
-            'moneyBack': '0.01',
-            'moneyArrears': '0.01',
-            sectionID: "2018年",
-        },
-        {
-            "id": 7,
-            "kind": "把妹飞",
-            "serialNumber": "003975",
-            "moneyShouldPay": '0.04',
-            "moneyPayed": '0.01',
-            'moneyMinus': '0.01',
-            'moneyBack': '0.01',
-            'moneyArrears': '0.01',
-            sectionID: "2018年",
-        }
-    ]
-};
+import {API_SERVER, HandShakeCode, bodyObj, RTN_CODE} from '../common/API.js';
+import {key_XH} from'../common/Storage';
 
 class ReceivablePaymentStatistics extends Component {
     _getInitialState() {
@@ -95,6 +17,7 @@ class ReceivablePaymentStatistics extends Component {
             return dataBlob[sectionID + ':' + rowID];
         };
         return {
+            hasDatas: false,
             dataSource: new ListView.DataSource({
                 getRowData: getRowData,
                 getSectionHeaderData: getSectionData,
@@ -104,53 +27,70 @@ class ReceivablePaymentStatistics extends Component {
         }
     }
 
-    componentWillMount() {
-        var res = this.listViewHandleData(ReceivablePaymentStatisticsData.data);
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(res.dataBlob, res.sectionIDs, res.rowIDs),
-            loaded: true
-        });
-    }
-    /**
-      * 数据处理
-      */
-    listViewHandleData(result) {
-        var me = this,
-            dataBlob = {},
-            sectionIDs = [],
-            rowIDs = [],
-            key,
-            //result = Util.sortResource(data),        //重新排序
-            length = result.length,
-            splitIdx;
-
-        var sCount = -1;
-        //将数据分隔成两段
-        for (var i = 0; i < length; i++) {
-            var item = result[i]
-            var sectionID = item.sectionID;
-
-            if (sectionIDs.indexOf(sectionID) != -1) {
-                dataBlob[sectionID + ":" + i] = item;
-                rowIDs[sCount].push(i);
-            } else {
-                //first i=0
-                sCount++;
-                var arr = [];
-                arr.push(i);
-                sectionIDs.push(sectionID);
-                rowIDs.push(arr);
-                //the right of the equal is the SectionData
-                dataBlob[sectionID] = sectionID
-                dataBlob[sectionID + ":" + i] = item;
+    async foo() {
+        var XH = '';
+        try {
+            XH = await AsyncStorage.getItem(key_XH);
+            if (XH !== null) {
+                // We have data!!
             }
+        } catch (error) {
+            // Error retrieving data
+        } finally {
+            await this._getPaymentDetailFromApiAsync(XH);
         }
+    }
 
-        return {
-            dataBlob: dataBlob,
-            sectionIDs: sectionIDs,
-            rowIDs: rowIDs
-        }
+    async _getPaymentDetailFromApiAsync(xuehao) {
+        return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.paymentTableRequireCollection + '&XH=' + xuehao))
+            .then((response) => {
+                if (response.status == 200) {
+                    return {
+                        "DETAIL": {
+                            "2015年": [{ "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" }, { "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" }, { "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }],
+                            "2016年": [{ "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" }, { "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" }, { "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }],
+                            "2017年": [{ "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" }, { "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" }, { "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }],
+                        },
+                        "RTN_CODE": "00", "RTN_MSG": "有其缴费项"
+                    };
+
+                    // return response.json();
+                }
+                else {
+                    toastShort('系统错误！');
+                    throw new Error('Something went wrong on api server!');
+                }
+            })
+            .then((responseJson) => {
+                var datas = {},
+                    sectionIDs = [],
+                    rowIDs = [];
+                var sCount = 0;
+                var sourceDatas = responseJson.DETAIL;
+                for (var i in sourceDatas) {
+                    sectionIDs.push(i);
+                    var arr = [];
+                    rowIDs.push(arr);
+                    datas[i] = i;
+                    for (var j = 0; j < sourceDatas[i].length; j++) {
+                        datas[i + ":" + j] = sourceDatas[i][j];
+                        rowIDs[sCount].push(j);
+                    }
+                    sCount++;
+
+                }
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRowsAndSections(datas, sectionIDs, rowIDs),
+                    loaded: true,
+                    hasDatas: sCount > 0
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+    componentWillMount() {
+        this.foo();
     }
 
     constructor(props) {
@@ -180,12 +120,12 @@ class ReceivablePaymentStatistics extends Component {
                         flex: 1,
                         backgroundColor: 'white',
                     }}>
-                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 15 }}>{rowData.kind}</Text>
-                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>应缴费金额(元): {rowData.moneyShouldPay}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 15 }}>{rowData.TYPE}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>应缴费金额(元): {rowData.YJK}</Text>
                         <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>已缴费金额(元): {rowData.moneyPayed}</Text>
-                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>减免金额(元): {rowData.moneyMinus}</Text>
-                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>退费金额(元): {rowData.moneyBack}</Text>
-                        <Text style={{ marginLeft: 10, marginBottom: 6, marginTop: 6, color: '#323232', fontSize: 11 }}>欠费金额(元): {rowData.moneyArrears}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>减免金额(元): {rowData.YJM}</Text>
+                        <Text style={{ marginLeft: 10, marginTop: 6, color: '#323232', fontSize: 11 }}>退费金额(元): {rowData.RET}</Text>
+                        <Text style={{ marginLeft: 10, marginBottom: 6, marginTop: 6, color: '#323232', fontSize: 11 }}>欠费金额(元): {rowData.QKJE}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -199,20 +139,35 @@ class ReceivablePaymentStatistics extends Component {
         )
     }
 
+    renderContent() {
+        if (this.state.hasDatas == true) {
+            return <ListView
+                initialListSize={1}
+                enableEmptySections={true}
+                dataSource={this.state.dataSource}
+                renderRow={this._renderRow}
+                style={{ backgroundColor: 'white', flex: 1 }}
+                enableEmptySections={true}
+                renderSectionHeader={this._renderSectionHeader}
+                renderSeparator={this._renderSeparatorView}
+                />
+        } else {
+            return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <TouchableOpacity style={{ flex: 1, margin: 10, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ alignItems: 'center', justifyContent: 'center', color: '#1ba0ec', fontSize: 15 }}>
+                        暂无缴费记录
+                    </Text>
+                </TouchableOpacity>
+            </View>;
+        }
+    }
     render() {
-        return (<View>
-            <TitleBar  onLeftClick={this._back} title="应收款缴费统计表"/>
+        return (<View style={{
+            flex: 1
+        }}>
+            <TitleBar onLeftClick={this._back} title="缴费明细表"/>
             <View style={{ flex: 1 }}>
-                <ListView
-                    initialListSize={1}
-                    enableEmptySections={true}
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderRow}
-                    style={{ backgroundColor: 'white', flex: 1 }}
-                    enableEmptySections={true}
-                    renderSectionHeader={this._renderSectionHeader}
-                    renderSeparator={this._renderSeparatorView}
-                    />
+                {this.renderContent() }
             </View>
         </View>);
     }
