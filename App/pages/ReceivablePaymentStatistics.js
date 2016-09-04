@@ -46,11 +46,7 @@ class ReceivablePaymentStatistics extends Component {
             .then((response) => {
                 if (response.status == 200) {
                     return {
-                        "DETAIL": {
-                            "2015年": [{ "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" }, { "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" }, { "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }],
-                            "2016年": [{ "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" }, { "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" }, { "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }],
-                            "2017年": [{ "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" }, { "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" }, { "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }],
-                        },
+                        "DETAIL": {},
                         "RTN_CODE": "00", "RTN_MSG": "有其缴费项"
                     };
 
@@ -165,7 +161,7 @@ class ReceivablePaymentStatistics extends Component {
         return (<View style={{
             flex: 1
         }}>
-            <TitleBar onLeftClick={this._back} title="缴费明细表"/>
+            <TitleBar onLeftClick={this._back} title="应收款缴费统计表"/>
             <View style={{ flex: 1 }}>
                 {this.renderContent() }
             </View>

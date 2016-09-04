@@ -6,47 +6,9 @@ import {    InteractionManager, AppRegistry,
 import TitleBar from '../components/TitleBar';
 import {toastShort} from '../utils/ToastUtil';
 import * as AppTheme from '../theme';
+import {API_SERVER, HandShakeCode, bodyObj, RTN_CODE} from '../common/API.js';
+import {key_XH} from'../common/Storage';
 
-const OrderFinishedData = {
-    "api": "GetStoreList",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "orderNumber": "201605003423023",
-        "money": '122.02',
-        "orderDate": "20160530 11:39:33",
-        "orderDescription": "学费2016，住宿费2016"
-    }, {
-            "id": 2,
-            "orderNumber": "201605003423023",
-            "money": '122.02',
-            "orderDate": "20160530 11:39:33",
-            "orderDescription": "学费2016，住宿费2016"
-        }, {
-            "id": 3,
-            "orderNumber": "201605003423023",
-            "money": '122.02',
-            "orderDate": "20160530 11:39:33",
-            "orderDescription": "学费2016，住宿费2016"
-        }, {
-            "id": 4,
-            "orderNumber": "201605003423023",
-            "money": '122.02',
-            "orderDate": "20160530 11:39:33",
-            "orderDescription": "学费2016，住宿费2016"
-        }, {
-            "id": 5,
-            "orderNumber": "201605003423023",
-            "money": '122.02',
-            "orderDate": "20160530 11:39:33",
-            "orderDescription": "学费2016，住宿费2016"
-        }
-    ]
-};
-
-let rows = [...OrderFinishedData.data];
 let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => { r1 !== r2 } });
 
 
@@ -56,11 +18,10 @@ class FinishedOrderList extends Component {
         this.state = {
             selectedLeft: true,
             dataSource: ds.cloneWithRows([]),
-            rows: rows
+            hasDatas: false,
         }
         this._renderRow = this._renderRow.bind(this);
         this._back = this._back.bind(this);
-        this._onItemClick = this._onItemClick.bind(this);
     }
     _back() {
         const {navigator} = this.props;
@@ -68,15 +29,56 @@ class FinishedOrderList extends Component {
             navigator.pop();
         });
     }
-    componentDidMount() {
-        this.setState({
-            dataSource: ds.cloneWithRows(this.state.rows)
-        })
+
+
+    async foo() {
+        var XH = '';
+        try {
+            XH = await AsyncStorage.getItem(key_XH);
+            if (XH !== null) {
+                // We have data!!
+            }
+        } catch (error) {
+            // Error retrieving data
+        } finally {
+            await this._getPaymentDetailFromApiAsync(XH);
+        }
     }
 
-    _onItemClick(rowData, rowID) {
-        toastShort("hello item");
+    async _getPaymentDetailFromApiAsync(xuehao) {
+        return fetch(API_SERVER, bodyObj('TRAN_CODE=' + HandShakeCode.orderCompleted + '&XH=' + xuehao))
+            .then((response) => {
+                if (response.status == 200) {
+                    return {
+                        "DETAIL": [
+                            { "DDNR": "学费", "DDSJ": "2016-07-15", "JSJE": "1", "PJDH": "000001" },
+                            { "DDNR": "住宿费", "DDSJ": "2016-07-15", "JSJE": "1", "PJDH": "000001" },
+                            { "DDNR": "预收水电费", "DDSJ": "2016-07-15", "JSJE": "1", "PJDH": "000001" }],
+                        "RTN_CODE": "00", "RTN_MSG": "有其缴费记录"
+                    };
+
+                    // return response.json();
+                }
+                else {
+                    toastShort('系统错误！');
+                    throw new Error('Something went wrong on api server!');
+                }
+            })
+            .then((responseJson) => {
+                var sourceDatas = responseJson.DETAIL;
+                this.setState({
+                    dataSource: ds.cloneWithRows(sourceDatas),
+                    hasDatas: sourceDatas && sourceDatas.length > 0
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
+    componentWillMount() {
+        this.foo();
+    }
+
     _renderHeader() {
         return (
             <View>
@@ -98,16 +100,16 @@ class FinishedOrderList extends Component {
         let backgroundColor = rowID % 2 == 0 ? '#f5f5f5' : 'white';
         return (
             <View key={rowData.id}>
-                <TouchableOpacity onPress={() => this._onItemClick(rowData, rowID) }>
+                <TouchableOpacity>
                     <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'space-between', backgroundColor: backgroundColor,
                     }}>
-                        <Text ellipsizeMode='middle' style={{ marginLeft: 10, marginTop: 10, marginBottom: 10, color: '#323232', fontSize: 10 }}>{rowData.orderNumber}</Text>
-                        <Text ellipsizeMode='middle' style={{ marginTop: 10, marginBottom: 10, color: '#323232', fontSize: 10 }}>{rowData.orderDate}</Text>
-                        <Text ellipsizeMode='middle' style={{ marginTop: 10, marginBottom: 10, color: '#323232', fontSize: 10 }}>{rowData.money}</Text>
-                        <Text ellipsizeMode='middle' style={{ marginTop: 10, marginBottom: 10, marginRight: 12, color: '#323232', fontSize: 10 }}>{rowData.orderDescription}</Text>
+                        <Text ellipsizeMode='middle' style={{ marginLeft: 10, marginTop: 10, marginBottom: 10, color: '#323232', fontSize: 10 }}>{rowData.PJDH}</Text>
+                        <Text ellipsizeMode='middle' style={{ marginTop: 10, marginBottom: 10, color: '#323232', fontSize: 10 }}>{rowData.DDSJ}</Text>
+                        <Text ellipsizeMode='middle' style={{ marginTop: 10, marginBottom: 10, color: '#323232', fontSize: 10 }}>{rowData.DDJE}</Text>
+                        <Text ellipsizeMode='middle' style={{ marginTop: 10, marginBottom: 10, marginRight: 12, color: '#323232', fontSize: 10 }}>{rowData.DDNR}</Text>
                     </View>
                 </TouchableOpacity>
             </View>

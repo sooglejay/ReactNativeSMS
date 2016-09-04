@@ -33,7 +33,6 @@ export default class AppWrapper extends Component {
     try {
       XH = await AsyncStorage.getItem(key_XH);
       if (XH !== null) {
-        console.log("取学号的值不为null:" + XH);
         // We have data!!
       }
     } catch (error) {
