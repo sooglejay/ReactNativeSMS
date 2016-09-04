@@ -68,9 +68,7 @@ class PaymentSummary extends Component {
           throw new Error('Something went wrong on api server!');
         }
       })
-      .then((responseJson) => {
-        console.log(" _getReceivablePaymentFromApiAsync:" + JSON.stringify(responseJson));
-    
+      .then((responseJson) => {    
          data.splice(0, data.length)
          var index=0;
          for(var i in responseJson){
@@ -92,10 +90,9 @@ class PaymentSummary extends Component {
             obj.money = responseJson[i];
             data[index++]=obj;
          }
-        console.log("ceshi 11:",JSON.stringify(data));
         this.setState(() => {
           return Object.assign({}, this.state, {
-            dataSource: ds.cloneWithRows(this.state.rows),
+            dataSource: ds.cloneWithRows(data),
             paymentSummaryReceivableData:[...data],
           });
         });
@@ -117,8 +114,6 @@ class PaymentSummary extends Component {
         }
       })
       .then((responseJson) => {
-        console.log(" _getOtherPaymentFromApiAsync :" + JSON.stringify(responseJson));
-
         data.splice(0, data.length)
         for (var index = 0; index < responseJson.length; index++) {
             var element = responseJson[index];
@@ -128,7 +123,6 @@ class PaymentSummary extends Component {
             obj.id = index;
             data[index]=obj;
         }
-        console.log("ceshi 2:",JSON.stringify(data));
          this.setState(() => {
           return Object.assign({}, this.state, {
            paymentSummaryOtherData:[...data],
@@ -142,9 +136,6 @@ class PaymentSummary extends Component {
 
     //here left means "应收款缴费汇总表"
     _updateListViewDataSource(isLeft) {
-        toastShort('dddas');
-        console.log(" isRight:" + JSON.stringify(this.state.paymentSummaryOtherData));
-        console.log(" isLeft:" + JSON.stringify(this.state.paymentSummaryReceivableData));
          data.splice(0, data.length)
         if(isLeft){
             data  = [...this.state.paymentSummaryReceivableData];
