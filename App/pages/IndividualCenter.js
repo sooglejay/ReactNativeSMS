@@ -14,11 +14,12 @@ const RowComponent = (props) =>
         <Text style={{ color: '#666666', fontSize: 12 }}>{props.titleValue}</Text>
     </TouchableOpacity>
 const AvatarComponent = () =>
-    <View style={{ flex: 1, flexDirection: 'row' ,justifyContent:'center'}}>
-        <Image source={ require('../imgs/icon_avatar.jpg') } style={styles.container}>
-            <VibrancyView blurType="light" style={styles.container}>
-                <Text>刘连雨</Text>
-            </VibrancyView>
+    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+        <Image source={ require('../imgs/icon_avatar.jpg') } style={{ flex: 1,height:300, justifyContent: 'center' }}>
+            <BlurView blurType="light" style={styles.container}>
+                <Image source={ require('../imgs/icon_avatar.jpg') } style={{ borderRadius: 60, alignSelf: 'center', width: 120, height: 120 }}/>
+                <Text style={{ alignSelf: 'center', marginTop: 12,fontSize:20,color:'#222' }}>刘连雨</Text>
+            </BlurView>
         </Image>
     </View>
 
@@ -27,6 +28,7 @@ const ContainerComponent = ({data}) => {
     return <View style={ { flex: 1 } }>
         <AvatarComponent/>
         <View style={{ height: 12, backgroundColor: '#f5f5f5' }}></View>
+
         <RowComponent titleKey="我的院系"  titleValue={data.YX} />
         <RowComponent titleKey="我的专业"  titleValue={data.ZY} />
         <RowComponent titleKey="我的班级"  titleValue={data.BJ} />
