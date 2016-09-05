@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { View, StatusBar, Text, Platform, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView, InteractionManager, } from 'react-native';
+import { View, Alert,StatusBar, Text, Platform, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView, InteractionManager, } from 'react-native';
 import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import TitleBar from '../components/TitleBar';
@@ -13,7 +13,7 @@ import PaymentDetail from './PaymentDetail';
 import ReceivablePaymentStatistics from './ReceivablePaymentStatistics';
 import FinishedOrderList from './FinishedOrderList';
 
-
+import {key_XH} from'../common/Storage';
 
 const BANNER_IMGS = [
   require('../imgs/icon_bar.png'),
@@ -122,7 +122,17 @@ export default class Index extends Component {
   render() {
     return (
       <View>
-        <TitleBar isMainView={true}  title="学生缴费服务平台" onLeftClick={() => { toastShort("left") } } onRightClick={() => { toastShort("right") } }/>
+        <TitleBar isMainView={true}  title="学生缴费服务平台" onLeftClick={() => { toastShort("left") } } onRightClick={() => {
+          Alert.alert(
+            '退出登录',
+            "你确定要注销登录状态么？",
+            [
+              { text: '确定', onPress: () => {console.log('确定 Pressed!') }},
+              { text: '取消', onPress: () => console.log('OK Pressed!') },
+              
+            ]
+          )
+        } }/>
         <ScrollView
           style={ { flex: 1 } }
           showsVerticalScrollIndicator={ false }>
@@ -155,7 +165,7 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <View style={{  backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
+                <View style={{ backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
 
                 <TouchableOpacity onPress={() => this.handleNavigator(1) } style={ styles.touchableOpacityStyle }>
                   <View>
@@ -167,7 +177,7 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <View style={{  backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
+                <View style={{ backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
 
                 <TouchableOpacity onPress={() => this.handleNavigator(2) } style={ styles.touchableOpacityStyle }>
                   <View>
@@ -232,7 +242,7 @@ export default class Index extends Component {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <View style={{backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
+                <View style={{ backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
                 <TouchableOpacity style={styles.touchableOpacityStyle }>
                   <View>
                     <Image
@@ -240,7 +250,7 @@ export default class Index extends Component {
                       style={styles.imagePlus } />
                   </View>
                 </TouchableOpacity>
-                <View style={{backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
+                <View style={{ backgroundColor: AppTheme.SeparatorColor, width: 1 }}/>
                 <View style={ styles.touchableOpacityStyle }>
                 </View>
               </View>
