@@ -161,7 +161,13 @@ class ReceivablePaymentStatistics extends Component {
         return (<View style={{
             flex: 1
         }}>
-            <TitleBar onLeftClick={this._back} title="应收款缴费统计表"/>
+
+            <TitleBar
+                leftView={<Image   style={{ width: 22, height: 22 }} source={require('../imgs/arrow_left.png') }/> }
+                title="应收款缴费统计表"
+                onLeftClick = {this._back}
+                />
+
             <View style={{ flex: 1 }}>
                 {this.renderContent() }
             </View>

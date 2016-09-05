@@ -17,7 +17,7 @@ class PaymentDetail extends Component {
             return dataBlob[sectionID + ':' + rowID];
         };
         return {
-            hasDatas:false,
+            hasDatas: false,
             dataSource: new ListView.DataSource({
                 getRowData: getRowData,
                 getSectionHeaderData: getSectionData,
@@ -79,7 +79,7 @@ class PaymentDetail extends Component {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRowsAndSections(datas, sectionIDs, rowIDs),
                     loaded: true,
-                    hasDatas:sCount>0
+                    hasDatas: sCount > 0
                 });
             })
             .catch((error) => {
@@ -159,9 +159,14 @@ class PaymentDetail extends Component {
     }
     render() {
         return (<View style={{
-                flex: 1
-            }}>
-            <TitleBar onLeftClick={this._back} title="缴费明细表"/>
+            flex: 1
+        }}>
+            <TitleBar
+                leftView={<Image   style={{ width: 22, height: 22 }} source={require('../imgs/arrow_left.png') }/> }
+                title="缴费明细表"
+                onLeftClick={this._back}
+                />
+
             <View style={{ flex: 1 }}>
                 {this.renderContent() }
             </View>

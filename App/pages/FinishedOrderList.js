@@ -124,7 +124,12 @@ class FinishedOrderList extends Component {
 
     render() {
         return (<View>
-            <TitleBar  isMain={false} title="已完成订单" onLeftClick = {this._back}/>
+
+            <TitleBar
+                leftView={<Image   style={{ width: 22, height: 22 }} source={require('../imgs/arrow_left.png') }/> }
+                title="已完成订单"
+                onLeftClick = {this._back}
+                />
 
             <View style={{ flex: 1 }}>
                 <ListView

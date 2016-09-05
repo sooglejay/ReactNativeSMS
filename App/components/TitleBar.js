@@ -43,44 +43,30 @@ const CommonStyle = StyleSheet.create({
         color: 'white',
     }
 });
-const TitleBar = ({isMainView, title, onLeftClick, onRightClick}) => {
+
+const TitleBar = ({leftView, rightView, title, onLeftClick, onRightClick}) => {
     let statusBar = STATUS_BAR_HEIGHT == 0 ? <View></View> : <View style={{ backgroundColor: AppTheme.ThemeColor, height: STATUS_BAR_HEIGHT }}></View>;
 
-    let leftImage = isMainView ?
-        <Image
-            style={{ width: 22, height: 22 }}
-            source={require('../imgs/icon_university.png') }
-            /> :
-        <Image
-            style={{ width: 22, height: 22 }}
-            source={require('../imgs/arrow_left.png') }
-            />
-    let leftView =
-        <TouchableOpacity onPress={() => onLeftClick() }
-            style={CommonStyle.topbar_left_item}>
-            {leftImage}
-        </TouchableOpacity>;
-
-    let centerView =
-        <View style={CommonStyle.topbar_center_item}>
-            <Text style={CommonStyle.topbar_center_tv}>{title}</Text>
-        </View>
-
-    let rightView = isMainView ?
-        <TouchableOpacity onPress={() => onRightClick() }
-            style={CommonStyle.topbar_right_item}>
-            <Image
-                style={{ width: 22, height: 22 }}
-                source={require('../imgs/icon_power.png') }
-                />
-        </TouchableOpacity> : <View style={CommonStyle.topbar_right_item}/>;
-
+    leftView = leftView ? leftView : <View />;
+    rightView = rightView ? rightView : <View />;
     return (<View>
         {statusBar}
         <View style={CommonStyle.topbar_bg}>
-            {leftView}
-            {centerView}
-            {rightView}
+            <View  style={CommonStyle.topbar_left_item}>
+                <TouchableOpacity onPress={() => onLeftClick() }>
+                    {leftView}
+                </TouchableOpacity>
+            </View>
+            <View  style={CommonStyle.topbar_center_item}>
+                <TouchableOpacity>
+                   <Text style={CommonStyle.topbar_center_tv}>{title}</Text>
+                </TouchableOpacity>
+            </View>
+            <View  style={CommonStyle.topbar_right_item}>
+                <TouchableOpacity onPress={() => onRightClick() }>
+                    {rightView}
+                </TouchableOpacity>
+            </View>
         </View>
     </View>);
 }

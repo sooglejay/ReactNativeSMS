@@ -150,7 +150,9 @@ export default class SystemNotificationPage extends Component {
             <View style={{
                 flex: 1
             }}>
-                <TitleBar isMainView={false}  title="系统通知" onLeftClick={() => { toastShort("left") } } onRightClick={() => { toastShort("right") } }/>
+                <TitleBar
+                   title="系统通知"
+                    />
                 <View style={{ flex: 1 }}>
                     {this.renderContent(this.state.dataSource.cloneWithRows(
                         this.state.storeLists === undefined ? [] : this.state.storeLists), this.state.hasSystemNotification) }

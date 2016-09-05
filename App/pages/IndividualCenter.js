@@ -15,10 +15,10 @@ const RowComponent = (props) =>
     </TouchableOpacity>
 const AvatarComponent = () =>
     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-        <Image source={ require('../imgs/icon_avatar.jpg') } style={{ flex: 1,height:300, justifyContent: 'center' }}>
+        <Image source={ require('../imgs/icon_avatar.jpg') } style={{ flex: 1, height: 300, justifyContent: 'center' }}>
             <BlurView blurType="light" style={styles.container}>
                 <Image source={ require('../imgs/icon_avatar.jpg') } style={{ borderRadius: 60, alignSelf: 'center', width: 120, height: 120 }}/>
-                <Text style={{ alignSelf: 'center', marginTop: 12,fontSize:20,color:'#222' }}>刘连雨</Text>
+                <Text style={{ alignSelf: 'center', marginTop: 12, fontSize: 20, color: '#222' }}>刘连雨</Text>
             </BlurView>
         </Image>
     </View>
@@ -57,7 +57,9 @@ export default class IndividualCenter extends Component {
     render() {
         return (
             <View style={ { flex: 1 } }>
-                <TitleBar isMainView={false}  title="个人中心" onLeftClick={() => { toastShort("you") } }/>
+                <TitleBar
+                    title="个人中心"
+                    />
                 <ScrollView
                     style={ { flex: 1 } }
                     showsVerticalScrollIndicator={ false }>

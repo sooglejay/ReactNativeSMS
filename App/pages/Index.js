@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { View, Alert,StatusBar, Text, Platform, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView, InteractionManager, } from 'react-native';
+import { View, Alert, StatusBar, Text, Platform, Dimensions, Image, StyleSheet, TouchableOpacity, ScrollView, InteractionManager, } from 'react-native';
 import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import TitleBar from '../components/TitleBar';
@@ -122,17 +122,23 @@ export default class Index extends Component {
   render() {
     return (
       <View>
-        <TitleBar isMainView={true}  title="学生缴费服务平台" onLeftClick={() => { toastShort("left") } } onRightClick={() => {
-          Alert.alert(
-            '退出登录',
-            "你确定要注销登录状态么？",
-            [
-              { text: '确定', onPress: () => {console.log('确定 Pressed!') }},
-              { text: '取消', onPress: () => console.log('OK Pressed!') },
-              
-            ]
-          )
-        } }/>
+        <TitleBar
+          leftView={<Image   style={{ width: 22, height: 22 }} source={require('../imgs/icon_university.png') }/> }
+          title="学生缴费服务平台"
+          rightView={<Image  style={{ width: 22, height: 22 }} source={require('../imgs/icon_power.png') }/> }
+          onLeftClick={() => { toastShort("left") } }
+          onRightClick={() => {
+            Alert.alert(
+              '退出登录',
+              "你确定要注销登录状态么？",
+              [
+                { text: '确定', onPress: () => { console.log('确定 Pressed!') } },
+                { text: '取消', onPress: () => console.log('OK Pressed!') },
+
+              ]
+            )
+          } }
+          />
         <ScrollView
           style={ { flex: 1 } }
           showsVerticalScrollIndicator={ false }>
