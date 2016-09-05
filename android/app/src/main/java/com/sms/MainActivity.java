@@ -1,6 +1,7 @@
 package com.sms;
 
 import com.facebook.react.ReactActivity;
+import com.aakashns.reactnativedialogs.ReactNativeDialogsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainActivity extends ReactActivity {

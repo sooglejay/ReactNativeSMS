@@ -151,14 +151,18 @@ android {
 }
 repositories {
     maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
+    maven { url "https://jitpack.io" }
+
 }
 
 dependencies {
+    compile project(':react-native-dialogs')
     compile project(':react-native-linear-gradient')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-blur')
+    compile 'com.afollestad.material-dialogs:core:0.9.0.1'
 
     // compile project(':react-native-vector-icons') //from react-native-vector-icons
 }
