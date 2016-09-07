@@ -6,7 +6,7 @@ import ShortLine from '../components/ShortLine';
 import ShortColumn from '../components/ShortColumn';
 import { toastShort } from '../utils/ToastUtil';
 import TitleBar from '../components/TitleBar';
-const { BlurView, VibrancyView } = require('react-native-blur');
+import { BlurView, VibrancyView } from 'react-native-blur';
 
 const RowComponent = (props) =>
     <TouchableOpacity style={{ flexDirection: 'row', margin: 10 }}>

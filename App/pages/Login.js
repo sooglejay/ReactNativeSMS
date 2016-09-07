@@ -4,7 +4,7 @@ import { View, AsyncStorage, Text, ScrollView, BackAndroid, TouchableOpacity, Im
 import ShortLineTwo from '../components/ShortLineTwo';
 import { toastShort } from '../utils/ToastUtil';
 import {API_SERVER, HandShakeCode, bodyObj} from '../common/API.js';
-import {key_isLogined, value_isLogined,key_XH} from'../common/Storage';
+import {key_isLogined, value_isLogined, key_XH} from'../common/Storage';
 
 import AppWrapper from './AppWrapper';
 var EncryptionModule = NativeModules.EncryptionModule;
@@ -67,7 +67,10 @@ class Login extends Component {
   render() {
     return (
       <View style={ { backgroundColor: '#2bb4f7', flex: 1 } }>
-        <ScrollView style={ { flex: 1 } }>
+        <ScrollView contentContainerStyle={{ flex: 1 }}
+          keyboardDismissMode='on-drag' //拖动界面输入法退出
+          keyboardShouldPersistTaps={false} //点击输入法意外的区域，输入法退出
+          >
           <View>
             <Image
               source={ require('../imgs/icon_university.png') }
@@ -169,15 +172,15 @@ class Login extends Component {
                 this.btnLoginClick();
               } }
               style={ { justifyContent: 'center', marginTop: 40, alignItems: 'center' } }>
-              <View style={ { backgroundColor: 'white', borderRadius: 32, width: 300, height: 40, justifyContent: 'center', alignItems: 'center' } }>
+              <View style={ { backgroundColor: 'white', borderRadius: 32, width: 300, height: 40,marginBottom:30, justifyContent: 'center', alignItems: 'center' } }>
                 <Text style={ { color: '#1aa2ed' } }>
                   登录
                 </Text>
               </View>
             </TouchableOpacity>
           </View>
-        </ScrollView>
-      </View>
+        </ScrollView >
+      </View >
     );
   }
 }

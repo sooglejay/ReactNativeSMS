@@ -46,9 +46,15 @@ class ReceivablePaymentStatistics extends Component {
             .then((response) => {
                 if (response.status == 200) {
                     return {
-                        "DETAIL": {},
+                        "DETAIL":
+                        [
+                            { "YEAR": "2015", "QKJE": "4799", "RET": "0", "TYPE": "学费", "YJK": "4800", "YJM": "1" },
+                            { "YEAR": "2015", "QKJE": "1199", "RET": "0", "TYPE": "住宿费", "YJK": "1200", "YJM": "1" },
+                            { "YEAR": "2015", "QKJE": "99", "RET": "0", "TYPE": "预收水电费", "YJK": "100", "YJM": "1" }
+                        ],
                         "RTN_CODE": "00", "RTN_MSG": "有其缴费项"
-                    };
+                    }
+
 
                     // return response.json();
                 }
@@ -62,19 +68,42 @@ class ReceivablePaymentStatistics extends Component {
                     sectionIDs = [],
                     rowIDs = [];
                 var sCount = 0;
-                var sourceDatas = responseJson.DETAIL;
-                for (var i in sourceDatas) {
-                    sectionIDs.push(i);
-                    var arr = [];
-                    rowIDs.push(arr);
-                    datas[i] = i;
-                    for (var j = 0; j < sourceDatas[i].length; j++) {
-                        datas[i + ":" + j] = sourceDatas[i][j];
-                        rowIDs[sCount].push(j);
+                var tempDatas = responseJson.DETAIL;
+                var sourceDatas = {};
+                var c = 0;
+                var b = -1;
+                for (var j = 0; j < tempDatas.length; j++) {
+                    var item = tempDatas[j];
+                    var year = item.YEAR;
+                    if (year in sourceDatas) {
+                        rowIDs[b].push(c);
+                        c++;
+                    } else {
+                        c = 0;
+                        b++;
+                        sectionIDs.push(year);
+                        var arr = [];
+                        rowIDs.push(arr);
+                        rowIDs[b].push(c);
                     }
-                    sCount++;
+                     datas[year + ":" + c] = item;
 
+                    // sourceDatas[year].push(item);
                 }
+                console.log("测试hah:",datas,sectionIDs,rowIDs);
+
+                // for (var i in sourceDatas) {
+                //     sectionIDs.push(i);
+                //     var arr = [];
+                //     rowIDs.push(arr);
+                //     datas[i] = i;
+                //     for (var j = 0; j < sourceDatas[i].length; j++) {
+                //         datas[i + ":" + j] = sourceDatas[i][j];
+                //         rowIDs[sCount].push(j);
+                //     }
+                //     sCount++;
+
+                // }
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRowsAndSections(datas, sectionIDs, rowIDs),
                     loaded: true,

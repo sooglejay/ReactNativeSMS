@@ -51,9 +51,10 @@ class FinishedOrderList extends Component {
                 if (response.status == 200) {
                     return {
                         "DETAIL": [
-                            { "DDNR": "学费", "DDSJ": "2016-07-15", "JSJE": "1", "PJDH": "000001" },
-                            { "DDNR": "住宿费", "DDSJ": "2016-07-15", "JSJE": "1", "PJDH": "000001" },
-                            { "DDNR": "预收水电费", "DDSJ": "2016-07-15", "JSJE": "1", "PJDH": "000001" }],
+                            { "SFND": "2015", "DDNR": "学费", "DDSJ": "2016-07-15", "DDJE": "1", "PJDH": "000001" },
+                            { "SFND": "2015", "DDNR": "住宿费", "DDSJ": "2016-07-15", "DDJE": "1", "PJDH": "000001" },
+                            { "SFND": "2015", "DDNR": "预收水电费", "DDSJ": "2016-07-15", "DDJE": "1", "PJDH": "000001" }
+                        ],
                         "RTN_CODE": "00", "RTN_MSG": "有其缴费记录"
                     };
 
